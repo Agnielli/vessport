@@ -1,0 +1,485 @@
+---
+// Contact form with validation
+---
+
+<section id="contacto" class="py-20 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center mb-16">
+        <h2
+          class="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4"
+        >
+          Contactanos
+        </h2>
+        <p class="text-xl text-gray-600">
+          ¿Listo para crear las camisetas de tu equipo? Estamos aquí para
+          ayudarte
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-5 gap-12">
+        <!-- Contact Information -->
+        <div class="space-y-8 lg:col-span-2">
+          <div>
+            <h3 class="text-2xl font-display font-bold text-gray-900 mb-6">
+              Información de Contacto
+            </h3>
+
+            <div class="space-y-6">
+              <div class="flex items-start space-x-4">
+                <div
+                  class="w-12 h-12 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
+                  <svg
+                    class="w-6 h-6 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-1">Teléfono</h4>
+                  <p class="text-gray-600">+34693938377</p>
+                  <p class="text-sm text-gray-500">
+                    Lunes a Viernes: 8:00 AM - 6:00 PM
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-4">
+                <div
+                  class="w-12 h-12 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
+                  <svg
+                    class="w-6 h-6 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-1">Email</h4>
+                  <p class="text-gray-600">info@vessport.com</p>
+                  <p class="text-sm text-gray-500">Respuesta en 24 horas</p>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-4">
+                <div
+                  class="w-12 h-12 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
+                  <svg
+                    class="w-6 h-6 text-primary"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                    ></path>
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-1">Ubicación</h4>
+                  <p class="text-gray-600">Garrucha, España</p>
+                  <p class="text-sm text-gray-500">Envíos a todo el país</p>
+                </div>
+              </div>
+
+              <div class="flex items-start space-x-4">
+                <div
+                  class="w-12 h-12 bg-green-500 bg-opacity-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                >
+                  <svg
+                    class="w-6 h-6 text-green-500"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.106"
+                    ></path>
+                  </svg>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-gray-900 mb-1">WhatsApp</h4>
+                  <p class="text-gray-600">+34693938377</p>
+                  <a
+                    href="https://wa.me/573001234567"
+                    target="_blank"
+                    class="inline-flex items-center text-green-500 hover:text-green-600 text-sm font-medium"
+                  >
+                    Chatear ahora
+                    <svg
+                      class="w-4 h-4 ml-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      ></path>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="bg-gray-50 p-8 rounded-xl lg:col-span-3">
+          <h3 class="text-xl font-display font-bold text-gray-900 mb-6">
+            Envíanos un Mensaje
+          </h3>
+
+          <form id="contact-form" class="space-y-6">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label
+                  for="name"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  Nombre Completo *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="Tu nombre completo"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="email"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  Email *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="tu@email.com"
+                />
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <label
+                  for="phone"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  Teléfono
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="+34693938377"
+                />
+              </div>
+
+              <div>
+                <label
+                  for="team"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  Nombre del Equipo
+                </label>
+                <input
+                  type="text"
+                  id="team"
+                  name="team"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                  placeholder="Nombre de tu equipo"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label
+                for="service"
+                class="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Servicio de Interés
+              </label>
+              <select
+                id="service"
+                name="service"
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              >
+                <option value="">Selecciona un servicio</option>
+                <option value="camisetas-futbol">Camisetas de Fútbol</option>
+                <option value="camisetas-basquet"
+                  >Camisetas de Básquetbol</option
+                >
+                <option value="camisetas-volley">Camisetas de Voleibol</option>
+                <option value="camisetas-running">Camisetas de Running</option>
+                <option value="camisetas-ciclismo">Camisetas de Ciclismo</option
+                >
+                <option value="diseno-personalizado"
+                  >Diseño Personalizado</option
+                >
+                <option value="otro">Otro</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                for="message"
+                class="block text-sm font-medium text-gray-700 mb-2"
+              >
+                Mensaje *
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="4"
+                required
+                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                placeholder="Cuéntanos sobre tu proyecto, cantidad de camisetas, diseño deseado, etc."
+              ></textarea>
+            </div>
+
+            <!-- Subida de imágenes -->
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">
+                Adjuntar Imágenes (Opcional)
+              </label>
+              <div
+                class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition-colors"
+              >
+                <input
+                  type="file"
+                  id="images"
+                  name="images"
+                  multiple
+                  accept="image/*"
+                  class="hidden"
+                />
+                <div
+                  id="upload-area"
+                  class="cursor-pointer"
+                  onclick="document.getElementById('images').click()"
+                >
+                  <svg
+                    class="w-12 h-12 text-gray-400 mx-auto mb-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                    ></path>
+                  </svg>
+                  <p class="text-gray-600 mb-2">
+                    Arrastra imágenes aquí o haz clic para seleccionar
+                  </p>
+                  <p class="text-sm text-gray-500">
+                    PNG, JPG, GIF hasta 10MB cada una
+                  </p>
+                </div>
+                <div
+                  id="image-preview"
+                  class="mt-4 grid grid-cols-2 gap-4 hidden"
+                >
+                </div>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-primary hover:bg-primary-dark text-white py-3 px-6 rounded-lg font-semibold transition-colors"
+            >
+              Enviar Mensaje
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const contactForm = document.getElementById(
+      'contact-form'
+    ) as HTMLFormElement;
+    const imageInput = document.getElementById('images') as HTMLInputElement;
+    const imagePreview = document.getElementById(
+      'image-preview'
+    ) as HTMLElement;
+    const uploadArea = document.getElementById('upload-area') as HTMLElement;
+
+    let selectedImages: File[] = [];
+
+    // Manejo de drag and drop
+    uploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadArea.classList.add('border-primary', 'bg-blue-50');
+    });
+
+    uploadArea.addEventListener('dragleave', (e) => {
+      e.preventDefault();
+      uploadArea.classList.remove('border-primary', 'bg-blue-50');
+    });
+
+    uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadArea.classList.remove('border-primary', 'bg-blue-50');
+
+      const files = Array.from(e.dataTransfer?.files || []);
+      handleImageSelection(files);
+    });
+
+    // Manejo de selección de archivos
+    imageInput.addEventListener('change', (e) => {
+      const files = Array.from((e.target as HTMLInputElement).files || []);
+      handleImageSelection(files);
+    });
+
+    function handleImageSelection(files: File[]) {
+      // Filtrar solo imágenes y limitar tamaño
+      const validImages = files.filter((file) => {
+        if (!file.type.startsWith('image/')) {
+          alert(`${file.name} no es una imagen válida`);
+          return false;
+        }
+        if (file.size > 10 * 1024 * 1024) {
+          // 10MB
+          alert(`${file.name} es demasiado grande (máximo 10MB)`);
+          return false;
+        }
+        return true;
+      });
+
+      selectedImages = [...selectedImages, ...validImages];
+      updateImagePreview();
+    }
+
+    function updateImagePreview() {
+      if (selectedImages.length === 0) {
+        imagePreview.classList.add('hidden');
+        return;
+      }
+
+      imagePreview.classList.remove('hidden');
+      imagePreview.innerHTML = selectedImages
+        .map(
+          (file, index) => `
+        <div class="relative">
+          <img 
+            src="${URL.createObjectURL(file)}" 
+            alt="Preview ${index + 1}"
+            class="w-full h-24 object-cover rounded-lg border border-gray-300"
+          />
+          <button 
+            type="button"
+            onclick="removeImage(${index})"
+            class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600"
+          >
+            ×
+          </button>
+          <p class="text-xs text-gray-600 mt-1 truncate">${file.name}</p>
+        </div>
+      `
+        )
+        .join('');
+    }
+
+    // Función global para remover imágenes
+    (window as any).removeImage = (index: number) => {
+      selectedImages.splice(index, 1);
+      updateImagePreview();
+    };
+
+    contactForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(contactForm);
+
+      // Agregar imágenes al FormData
+      selectedImages.forEach((file, index) => {
+        formData.append(`image_${index}`, file);
+      });
+
+      const data = Object.fromEntries(formData.entries());
+
+      // Basic validation
+      if (!data.name || !data.email || !data.message) {
+        alert('Por favor completa todos los campos obligatorios.');
+        return;
+      }
+
+      // Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(data.email as string)) {
+        alert('Por favor ingresa un email válido.');
+        return;
+      }
+
+      try {
+        // Enviar formulario con imágenes
+        const response = await fetch('/api/contact', {
+          method: 'POST',
+          body: formData, // Usar FormData para enviar archivos
+        });
+
+        if (response.ok) {
+          alert('¡Mensaje enviado exitosamente! Te contactaremos pronto.');
+          contactForm.reset();
+          selectedImages = [];
+          updateImagePreview();
+        } else {
+          throw new Error('Error al enviar el mensaje');
+        }
+
+        // Optional: Redirect to WhatsApp with pre-filled message
+        // const whatsappMessage = encodeURIComponent(
+        //   `Hola! Soy ${data.name}. ${data.message}`
+        // );
+        // window.open(`https://wa.me/573001234567?text=${whatsappMessage}`, '_blank');
+      } catch (error) {
+        console.error('Error sending message:', error);
+        alert(
+          'Hubo un error al enviar el mensaje. Por favor intenta nuevamente.'
+        );
+      }
+    });
+  });
+</script>

@@ -1,0 +1,189 @@
+---
+import ProductCard from './ProductCard.astro';
+
+// Product data - TODO: Replace with API call in backend integration
+const products = [
+  {
+    id: 'camiseta-futbol-1',
+    name: 'Camiseta Fútbol Pro',
+    price: 45000,
+    image: '/images/camiseta-futbol-1.jpg',
+    description:
+      'Camiseta profesional con tecnología full-print, ideal para equipos de fútbol.',
+  },
+  {
+    id: 'camiseta-basquet-1',
+    name: 'Camiseta Baloncesto Elite',
+    price: 48000,
+    image: '/images/camiseta-basquet-1.jpg',
+    description:
+      'Diseño deportivo con máxima transpirabilidad para equipos de básquetbol.',
+  },
+  {
+    id: 'camiseta-volley-1',
+    name: 'Camiseta Volley Master',
+    price: 42000,
+    image: '/images/camiseta-volley-1.jpg',
+    description: 'Camiseta ligera y cómoda, perfecta para equipos de voleibol.',
+  },
+  {
+    id: 'camiseta-running-1',
+    name: 'Camiseta Running Pro',
+    price: 38000,
+    image: '/images/camiseta-running-1.jpg',
+    description: 'Tecnología de secado rápido para corredores y atletas.',
+  },
+  {
+    id: 'camiseta-ciclismo-1',
+    name: 'Camiseta Ciclismo Aero',
+    price: 52000,
+    image: '/images/camiseta-ciclismo-1.jpg',
+    description: 'Diseño aerodinámico con bolsillos traseros para ciclistas.',
+  },
+  {
+    id: 'camiseta-personalizada-1',
+    name: 'Camiseta Personalizada',
+    price: 55000,
+    image: '/images/camiseta-personalizada-1.jpg',
+    description:
+      'Diseño completamente personalizado según tus especificaciones.',
+  },
+];
+---
+
+<section id="productos" class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2
+        class="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4"
+      >
+        Nuestros Productos
+      </h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        Descubre nuestra colección de camisetas deportivas con tecnología
+        full-print
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {
+        products.map((product) => (
+          <ProductCard
+            id={product.id}
+            name={product.name}
+            price={product.price}
+            image={product.image}
+            description={product.description}
+          />
+        ))
+      }
+    </div>
+
+    <div class="text-center mt-12">
+      <p class="text-gray-600 mb-4">
+        ¿Necesitas un diseño específico o tienes dudas sobre nuestros productos?
+      </p>
+      <a
+        href="#contacto"
+        class="inline-flex items-center bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+      >
+        Contactar Asesor
+        <svg
+          class="w-5 h-5 ml-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Funciones globales para los botones
+  window.viewProduct = (productId: string) => {
+    window.location.href = `/producto/${productId}`;
+  };
+
+  window.startDesign = (productId: string) => {
+    window.location.href = `/design/editor?product=${productId}`;
+  };
+
+  window.addToCart = (productId: string) => {
+    // Buscar el producto en los datos
+    const products = [
+      {
+        id: 'camiseta-futbol-1',
+        name: 'Camiseta Fútbol Pro',
+        price: 45000,
+        image: '/images/camiseta-futbol-1.jpg',
+        description:
+          'Camiseta profesional con tecnología full-print, ideal para equipos de fútbol.',
+      },
+      {
+        id: 'camiseta-basquet-1',
+        name: 'Camiseta Baloncesto Elite',
+        price: 48000,
+        image: '/images/camiseta-basquet-1.jpg',
+        description:
+          'Diseño deportivo con máxima transpirabilidad para equipos de básquetbol.',
+      },
+      {
+        id: 'camiseta-volley-1',
+        name: 'Camiseta Volley Master',
+        price: 42000,
+        image: '/images/camiseta-volley-1.jpg',
+        description:
+          'Camiseta ligera y cómoda, perfecta para equipos de voleibol.',
+      },
+      {
+        id: 'camiseta-running-1',
+        name: 'Camiseta Running Pro',
+        price: 38000,
+        image: '/images/camiseta-running-1.jpg',
+        description: 'Tecnología de secado rápido para corredores y atletas.',
+      },
+      {
+        id: 'camiseta-ciclismo-1',
+        name: 'Camiseta Ciclismo Aero',
+        price: 52000,
+        image: '/images/camiseta-ciclismo-1.jpg',
+        description:
+          'Diseño aerodinámico con bolsillos traseros para ciclistas.',
+      },
+      {
+        id: 'camiseta-personalizada-1',
+        name: 'Camiseta Personalizada',
+        price: 55000,
+        image: '/images/camiseta-personalizada-1.jpg',
+        description:
+          'Diseño completamente personalizado según tus especificaciones.',
+      },
+    ];
+    const product = products.find((p) => p.id === productId);
+
+    if (product) {
+      const cartItem = {
+        productId: product.id,
+        name: product.name,
+        price: product.price,
+        size: 'M', // Talla por defecto
+        quantity: 1,
+        designSalesCount: 0, // Por defecto, no es un diseño gratuito
+      };
+
+      // Disparar evento para agregar al carrito
+      window.dispatchEvent(
+        new CustomEvent('addToCart', {
+          detail: cartItem,
+        })
+      );
+    }
+  };
+</script>

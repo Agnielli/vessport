@@ -1,0 +1,892 @@
+---
+// Editor visual para crear diseños de camisetas
+export interface Props {
+  productId?: string;
+  designId?: string;
+}
+
+const { productId, designId } = Astro.props;
+---
+
+<div id="design-editor" class="h-screen bg-gray-100 flex">
+  <!-- Sidebar con herramientas -->
+  <div class="w-80 bg-white shadow-lg flex flex-col">
+    <!-- Header del editor -->
+    <div class="p-4 border-b border-gray-200">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl font-bold text-gray-900">Editor de Diseños</h2>
+        <button id="save-design" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg text-sm font-medium">
+          Guardar
+        </button>
+      </div>
+      
+      <!-- Información del diseño -->
+      <div class="space-y-2">
+        <input 
+          type="text" 
+          id="design-title" 
+          placeholder="Título del diseño" 
+          class="w-full p-2 border border-gray-300 rounded-lg text-sm"
+          value=""
+        />
+        <textarea 
+          id="design-description" 
+          placeholder="Descripción (opcional)" 
+          rows="2"
+          class="w-full p-2 border border-gray-300 rounded-lg text-sm resize-none"
+        ></textarea>
+      </div>
+    </div>
+
+    <!-- Herramientas -->
+    <div class="flex-1 overflow-y-auto">
+      <!-- Sección de elementos -->
+      <div class="p-4 border-b border-gray-200">
+        <h3 class="font-semibold text-gray-900 mb-3">Elementos</h3>
+        <div class="grid grid-cols-2 gap-2">
+          <button class="tool-btn bg-blue-50 hover:bg-blue-100 border border-blue-200 p-3 rounded-lg text-center" data-tool="text">
+            <svg class="w-6 h-6 mx-auto mb-1 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path>
+            </svg>
+            <span class="text-xs text-blue-600">Texto</span>
+          </button>
+          
+          <button class="tool-btn bg-green-50 hover:bg-green-100 border border-green-200 p-3 rounded-lg text-center" data-tool="image">
+            <svg class="w-6 h-6 mx-auto mb-1 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+            </svg>
+            <span class="text-xs text-green-600">Imagen</span>
+          </button>
+          
+          <button class="tool-btn bg-purple-50 hover:bg-purple-100 border border-purple-200 p-3 rounded-lg text-center" data-tool="shape">
+            <svg class="w-6 h-6 mx-auto mb-1 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+            </svg>
+            <span class="text-xs text-purple-600">Formas</span>
+          </button>
+          
+          <button class="tool-btn bg-yellow-50 hover:bg-yellow-100 border border-yellow-200 p-3 rounded-lg text-center" data-tool="upload">
+            <svg class="w-6 h-6 mx-auto mb-1 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+            </svg>
+            <span class="text-xs text-yellow-600">Subir</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Propiedades del elemento seleccionado -->
+      <div id="element-properties" class="p-4 border-b border-gray-200 hidden">
+        <h3 class="font-semibold text-gray-900 mb-3">Propiedades</h3>
+        <div id="properties-content" class="space-y-3">
+          <!-- Las propiedades se cargarán dinámicamente -->
+        </div>
+      </div>
+
+      <!-- Capas -->
+      <div class="p-4">
+        <h3 class="font-semibold text-gray-900 mb-3">Capas</h3>
+        <div id="layers-list" class="space-y-1">
+          <!-- Las capas se cargarán dinámicamente -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer con acciones -->
+    <div class="p-4 border-t border-gray-200 space-y-2">
+      <button id="publish-design" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-lg font-medium">
+        Publicar Diseño
+      </button>
+      <button id="preview-design" class="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 py-2 px-4 rounded-lg font-medium">
+        Vista Previa
+      </button>
+    </div>
+  </div>
+
+  <!-- Canvas principal -->
+  <div class="flex-1 flex flex-col">
+    <!-- Toolbar superior -->
+    <div class="bg-white border-b border-gray-200 p-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <button id="undo-btn" class="p-2 hover:bg-gray-100 rounded-lg" title="Deshacer">
+            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"></path>
+            </svg>
+          </button>
+          <button id="redo-btn" class="p-2 hover:bg-gray-100 rounded-lg" title="Rehacer">
+            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 10h-10a8 8 0 00-8 8v2m18-10l-6-6m6 6l-6 6"></path>
+            </svg>
+          </button>
+          <div class="w-px h-6 bg-gray-300"></div>
+          <button id="zoom-out" class="p-2 hover:bg-gray-100 rounded-lg" title="Alejar">
+            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7"></path>
+            </svg>
+          </button>
+          <span id="zoom-level" class="text-sm text-gray-600">100%</span>
+          <button id="zoom-in" class="p-2 hover:bg-gray-100 rounded-lg" title="Acercar">
+            <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="flex items-center space-x-2">
+          <select id="product-selector" class="border border-gray-300 rounded-lg px-3 py-1 text-sm">
+            <option value="">Seleccionar camiseta...</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Área del canvas -->
+    <div class="flex-1 bg-gray-50 overflow-hidden relative">
+      <div id="canvas-container" class="w-full h-full flex items-center justify-center">
+        <!-- Canvas de la camiseta -->
+        <div id="tshirt-canvas" class="relative bg-white rounded-lg shadow-lg" style="width: 400px; height: 500px;">
+          <!-- Imagen de la camiseta de fondo -->
+          <div id="tshirt-background" class="absolute inset-0 bg-gray-200 rounded-lg flex items-center justify-center">
+            <svg class="w-32 h-32 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+            </svg>
+          </div>
+          
+          <!-- Área de diseño -->
+          <div id="design-area" class="absolute inset-4 border-2 border-dashed border-gray-300 rounded-lg">
+            <!-- Los elementos del diseño se renderizarán aquí -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para subir imágenes -->
+<div id="upload-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center">
+  <div class="bg-white rounded-lg p-6 w-96">
+    <h3 class="text-lg font-semibold mb-4">Subir Imagen</h3>
+    <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+      <input type="file" id="image-upload" accept="image/*" class="hidden">
+      <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+      </svg>
+      <p class="text-gray-600 mb-2">Arrastra una imagen aquí o</p>
+      <button id="select-image" class="text-primary hover:text-primary-dark font-medium">selecciona un archivo</button>
+    </div>
+    <div class="flex justify-end space-x-2 mt-4">
+      <button id="cancel-upload" class="px-4 py-2 text-gray-600 hover:text-gray-800">Cancelar</button>
+      <button id="confirm-upload" class="px-4 py-2 bg-primary hover:bg-primary-dark text-white rounded-lg">Subir</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { supabase, designs, products } from '../../lib/supabase';
+  
+  interface DesignElement {
+    id: string;
+    type: 'text' | 'image' | 'shape';
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    rotation: number;
+    data: any;
+  }
+
+  class DesignEditor {
+    private canvas: HTMLElement;
+    private designArea: HTMLElement;
+    private elements: DesignElement[] = [];
+    private selectedElement: DesignElement | null = null;
+    private isDragging = false;
+    private isResizing = false;
+    private dragStart = { x: 0, y: 0 };
+    private currentProductId: string | null = null;
+    private currentDesignId: string | null = null;
+    private history: DesignElement[][] = [];
+    private historyIndex = -1;
+
+    constructor() {
+      this.canvas = document.getElementById('tshirt-canvas')!;
+      this.designArea = document.getElementById('design-area')!;
+      this.init();
+    }
+
+    private async init() {
+      this.setupEventListeners();
+      await this.loadProducts();
+      
+      // Si hay un designId, cargar el diseño existente
+      const urlParams = new URLSearchParams(window.location.search);
+      const designId = urlParams.get('design');
+      const productId = urlParams.get('product');
+      
+      if (designId) {
+        await this.loadDesign(designId);
+      } else if (productId) {
+        this.currentProductId = productId;
+        this.updateProductSelector();
+      }
+      
+      this.saveToHistory();
+    }
+
+    private setupEventListeners() {
+      // Herramientas
+      document.querySelectorAll('.tool-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const tool = (e.currentTarget as HTMLElement).dataset.tool;
+          this.handleToolClick(tool!);
+        });
+      });
+
+      // Canvas events
+      this.designArea.addEventListener('click', this.handleCanvasClick.bind(this));
+      this.designArea.addEventListener('mousedown', this.handleMouseDown.bind(this));
+      document.addEventListener('mousemove', this.handleMouseMove.bind(this));
+      document.addEventListener('mouseup', this.handleMouseUp.bind(this));
+
+      // Keyboard events
+      document.addEventListener('keydown', this.handleKeyDown.bind(this));
+
+      // Botones de acción
+      document.getElementById('save-design')?.addEventListener('click', this.saveDesign.bind(this));
+      document.getElementById('publish-design')?.addEventListener('click', this.publishDesign.bind(this));
+      document.getElementById('preview-design')?.addEventListener('click', this.previewDesign.bind(this));
+      
+      // Historial
+      document.getElementById('undo-btn')?.addEventListener('click', this.undo.bind(this));
+      document.getElementById('redo-btn')?.addEventListener('click', this.redo.bind(this));
+
+      // Zoom
+      document.getElementById('zoom-in')?.addEventListener('click', () => this.zoom(1.1));
+      document.getElementById('zoom-out')?.addEventListener('click', () => this.zoom(0.9));
+
+      // Selector de producto
+      document.getElementById('product-selector')?.addEventListener('change', (e) => {
+        this.currentProductId = (e.target as HTMLSelectElement).value;
+        this.updateTshirtBackground();
+      });
+
+      // Modal de subida
+      this.setupUploadModal();
+    }
+
+    private setupUploadModal() {
+      const modal = document.getElementById('upload-modal')!;
+      const uploadInput = document.getElementById('image-upload') as HTMLInputElement;
+      const selectBtn = document.getElementById('select-image')!;
+      const cancelBtn = document.getElementById('cancel-upload')!;
+      const confirmBtn = document.getElementById('confirm-upload')!;
+
+      selectBtn.addEventListener('click', () => uploadInput.click());
+      cancelBtn.addEventListener('click', () => modal.classList.add('hidden'));
+      
+      uploadInput.addEventListener('change', (e) => {
+        const file = (e.target as HTMLInputElement).files?.[0];
+        if (file) {
+          this.handleImageUpload(file);
+        }
+      });
+    }
+
+    private async loadProducts() {
+      const { data: productsData } = await products.getAll({ active: true });
+      const selector = document.getElementById('product-selector') as HTMLSelectElement;
+      
+      if (productsData) {
+        productsData.forEach(product => {
+          const option = document.createElement('option');
+          option.value = product.id;
+          option.textContent = product.name;
+          selector.appendChild(option);
+        });
+      }
+    }
+
+    private async loadDesign(designId: string) {
+      const { data: design } = await designs.getById(designId);
+      if (design) {
+        this.currentDesignId = design.id;
+        this.currentProductId = design.product_id;
+        
+        // Cargar datos del diseño
+        if (design.design_data && design.design_data.elements) {
+          this.elements = design.design_data.elements;
+          this.renderElements();
+        }
+
+        // Actualizar UI
+        (document.getElementById('design-title') as HTMLInputElement).value = design.title;
+        (document.getElementById('design-description') as HTMLTextAreaElement).value = design.description || '';
+        this.updateProductSelector();
+        this.updateTshirtBackground();
+      }
+    }
+
+    private updateProductSelector() {
+      if (this.currentProductId) {
+        const selector = document.getElementById('product-selector') as HTMLSelectElement;
+        selector.value = this.currentProductId;
+      }
+    }
+
+    private updateTshirtBackground() {
+      // Aquí se actualizaría la imagen de fondo de la camiseta
+      // basada en el producto seleccionado
+    }
+
+    private handleToolClick(tool: string) {
+      switch (tool) {
+        case 'text':
+          this.addTextElement();
+          break;
+        case 'image':
+          document.getElementById('upload-modal')?.classList.remove('hidden');
+          break;
+        case 'shape':
+          this.addShapeElement();
+          break;
+        case 'upload':
+          document.getElementById('image-upload')?.click();
+          break;
+      }
+    }
+
+    private addTextElement() {
+      const element: DesignElement = {
+        id: this.generateId(),
+        type: 'text',
+        x: 50,
+        y: 50,
+        width: 200,
+        height: 40,
+        rotation: 0,
+        data: {
+          text: 'Texto de ejemplo',
+          fontSize: 24,
+          fontFamily: 'Arial',
+          color: '#000000',
+          fontWeight: 'normal',
+          textAlign: 'left'
+        }
+      };
+
+      this.elements.push(element);
+      this.renderElements();
+      this.selectElement(element);
+      this.saveToHistory();
+    }
+
+    private addShapeElement() {
+      const element: DesignElement = {
+        id: this.generateId(),
+        type: 'shape',
+        x: 100,
+        y: 100,
+        width: 100,
+        height: 100,
+        rotation: 0,
+        data: {
+          shape: 'rectangle',
+          fill: '#3899B7',
+          stroke: '#000000',
+          strokeWidth: 2
+        }
+      };
+
+      this.elements.push(element);
+      this.renderElements();
+      this.selectElement(element);
+      this.saveToHistory();
+    }
+
+    private async handleImageUpload(file: File) {
+      try {
+        // Aquí se subiría la imagen a Supabase Storage
+        // Por ahora, usaremos URL.createObjectURL para demo
+        const imageUrl = URL.createObjectURL(file);
+        
+        const element: DesignElement = {
+          id: this.generateId(),
+          type: 'image',
+          x: 75,
+          y: 75,
+          width: 150,
+          height: 150,
+          rotation: 0,
+          data: {
+            src: imageUrl,
+            opacity: 1
+          }
+        };
+
+        this.elements.push(element);
+        this.renderElements();
+        this.selectElement(element);
+        this.saveToHistory();
+        
+        document.getElementById('upload-modal')?.classList.add('hidden');
+      } catch (error) {
+        console.error('Error uploading image:', error);
+        alert('Error al subir la imagen');
+      }
+    }
+
+    private renderElements() {
+      this.designArea.innerHTML = '';
+      
+      this.elements.forEach(element => {
+        const elementDiv = this.createElement(element);
+        this.designArea.appendChild(elementDiv);
+      });
+
+      this.updateLayersList();
+    }
+
+    private createElement(element: DesignElement): HTMLElement {
+      const div = document.createElement('div');
+      div.className = 'design-element absolute cursor-move border-2 border-transparent';
+      div.dataset.elementId = element.id;
+      div.style.left = `${element.x}px`;
+      div.style.top = `${element.y}px`;
+      div.style.width = `${element.width}px`;
+      div.style.height = `${element.height}px`;
+      div.style.transform = `rotate(${element.rotation}deg)`;
+
+      switch (element.type) {
+        case 'text':
+          div.innerHTML = `<div style="
+            font-size: ${element.data.fontSize}px;
+            font-family: ${element.data.fontFamily};
+            color: ${element.data.color};
+            font-weight: ${element.data.fontWeight};
+            text-align: ${element.data.textAlign};
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            overflow: hidden;
+          ">${element.data.text}</div>`;
+          break;
+          
+        case 'image':
+          div.innerHTML = `<img src="${element.data.src}" style="
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: ${element.data.opacity};
+          " />`;
+          break;
+          
+        case 'shape':
+          if (element.data.shape === 'rectangle') {
+            div.style.backgroundColor = element.data.fill;
+            div.style.border = `${element.data.strokeWidth}px solid ${element.data.stroke}`;
+          }
+          break;
+      }
+
+      return div;
+    }
+
+    private handleCanvasClick(e: MouseEvent) {
+      const target = e.target as HTMLElement;
+      const elementDiv = target.closest('.design-element') as HTMLElement;
+      
+      if (elementDiv) {
+        const elementId = elementDiv.dataset.elementId!;
+        const element = this.elements.find(el => el.id === elementId);
+        if (element) {
+          this.selectElement(element);
+        }
+      } else {
+        this.deselectElement();
+      }
+    }
+
+    private selectElement(element: DesignElement) {
+      this.selectedElement = element;
+      this.updateElementSelection();
+      this.showElementProperties(element);
+    }
+
+    private deselectElement() {
+      this.selectedElement = null;
+      this.updateElementSelection();
+      this.hideElementProperties();
+    }
+
+    private updateElementSelection() {
+      document.querySelectorAll('.design-element').forEach(el => {
+        el.classList.remove('border-blue-500');
+      });
+
+      if (this.selectedElement) {
+        const elementDiv = document.querySelector(`[data-element-id="${this.selectedElement.id}"]`);
+        elementDiv?.classList.add('border-blue-500');
+      }
+    }
+
+    private showElementProperties(element: DesignElement) {
+      const propertiesDiv = document.getElementById('element-properties')!;
+      const contentDiv = document.getElementById('properties-content')!;
+      
+      propertiesDiv.classList.remove('hidden');
+      contentDiv.innerHTML = this.generatePropertiesHTML(element);
+      
+      // Agregar event listeners para las propiedades
+      this.setupPropertyListeners(element);
+    }
+
+    private hideElementProperties() {
+      document.getElementById('element-properties')?.classList.add('hidden');
+    }
+
+    private generatePropertiesHTML(element: DesignElement): string {
+      let html = `
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-gray-700">Posición X</label>
+          <input type="number" id="prop-x" value="${element.x}" class="w-full p-2 border border-gray-300 rounded text-sm">
+        </div>
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-gray-700">Posición Y</label>
+          <input type="number" id="prop-y" value="${element.y}" class="w-full p-2 border border-gray-300 rounded text-sm">
+        </div>
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-gray-700">Ancho</label>
+          <input type="number" id="prop-width" value="${element.width}" class="w-full p-2 border border-gray-300 rounded text-sm">
+        </div>
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-gray-700">Alto</label>
+          <input type="number" id="prop-height" value="${element.height}" class="w-full p-2 border border-gray-300 rounded text-sm">
+        </div>
+        <div class="space-y-2">
+          <label class="block text-sm font-medium text-gray-700">Rotación</label>
+          <input type="range" id="prop-rotation" min="0" max="360" value="${element.rotation}" class="w-full">
+        </div>
+      `;
+
+      // Propiedades específicas por tipo
+      switch (element.type) {
+        case 'text':
+          html += `
+            <div class="space-y-2">
+              <label class="block text-sm font-medium text-gray-700">Texto</label>
+              <input type="text" id="prop-text" value="${element.data.text}" class="w-full p-2 border border-gray-300 rounded text-sm">
+            </div>
+            <div class="space-y-2">
+              <label class="block text-sm font-medium text-gray-700">Tamaño</label>
+              <input type="number" id="prop-font-size" value="${element.data.fontSize}" class="w-full p-2 border border-gray-300 rounded text-sm">
+            </div>
+            <div class="space-y-2">
+              <label class="block text-sm font-medium text-gray-700">Color</label>
+              <input type="color" id="prop-color" value="${element.data.color}" class="w-full p-2 border border-gray-300 rounded">
+            </div>
+          `;
+          break;
+          
+        case 'shape':
+          html += `
+            <div class="space-y-2">
+              <label class="block text-sm font-medium text-gray-700">Color de relleno</label>
+              <input type="color" id="prop-fill" value="${element.data.fill}" class="w-full p-2 border border-gray-300 rounded">
+            </div>
+          `;
+          break;
+      }
+
+      return html;
+    }
+
+    private setupPropertyListeners(element: DesignElement) {
+      // Propiedades generales
+      ['x', 'y', 'width', 'height', 'rotation'].forEach(prop => {
+        const input = document.getElementById(`prop-${prop}`) as HTMLInputElement;
+        input?.addEventListener('input', () => {
+          (element as any)[prop] = parseFloat(input.value) || 0;
+          this.renderElements();
+          this.selectElement(element);
+        });
+      });
+
+      // Propiedades específicas
+      if (element.type === 'text') {
+        const textInput = document.getElementById('prop-text') as HTMLInputElement;
+        textInput?.addEventListener('input', () => {
+          element.data.text = textInput.value;
+          this.renderElements();
+          this.selectElement(element);
+        });
+
+        const fontSizeInput = document.getElementById('prop-font-size') as HTMLInputElement;
+        fontSizeInput?.addEventListener('input', () => {
+          element.data.fontSize = parseInt(fontSizeInput.value) || 12;
+          this.renderElements();
+          this.selectElement(element);
+        });
+
+        const colorInput = document.getElementById('prop-color') as HTMLInputElement;
+        colorInput?.addEventListener('input', () => {
+          element.data.color = colorInput.value;
+          this.renderElements();
+          this.selectElement(element);
+        });
+      }
+
+      if (element.type === 'shape') {
+        const fillInput = document.getElementById('prop-fill') as HTMLInputElement;
+        fillInput?.addEventListener('input', () => {
+          element.data.fill = fillInput.value;
+          this.renderElements();
+          this.selectElement(element);
+        });
+      }
+    }
+
+    private updateLayersList() {
+      const layersDiv = document.getElementById('layers-list')!;
+      layersDiv.innerHTML = '';
+
+      this.elements.forEach((element, index) => {
+        const layerDiv = document.createElement('div');
+        layerDiv.className = 'flex items-center justify-between p-2 bg-gray-50 rounded text-sm';
+        layerDiv.innerHTML = `
+          <span>${this.getElementDisplayName(element)}</span>
+          <button class="text-red-500 hover:text-red-700" onclick="editor.deleteElement('${element.id}')">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+            </svg>
+          </button>
+        `;
+        
+        layerDiv.addEventListener('click', () => this.selectElement(element));
+        layersDiv.appendChild(layerDiv);
+      });
+    }
+
+    private getElementDisplayName(element: DesignElement): string {
+      switch (element.type) {
+        case 'text':
+          return `Texto: ${element.data.text.substring(0, 20)}...`;
+        case 'image':
+          return 'Imagen';
+        case 'shape':
+          return `Forma: ${element.data.shape}`;
+        default:
+          return 'Elemento';
+      }
+    }
+
+    public deleteElement(elementId: string) {
+      this.elements = this.elements.filter(el => el.id !== elementId);
+      this.renderElements();
+      this.deselectElement();
+      this.saveToHistory();
+    }
+
+    private handleMouseDown(e: MouseEvent) {
+      const target = e.target as HTMLElement;
+      const elementDiv = target.closest('.design-element') as HTMLElement;
+      
+      if (elementDiv && this.selectedElement) {
+        this.isDragging = true;
+        this.dragStart = {
+          x: e.clientX - this.selectedElement.x,
+          y: e.clientY - this.selectedElement.y
+        };
+      }
+    }
+
+    private handleMouseMove(e: MouseEvent) {
+      if (this.isDragging && this.selectedElement) {
+        const rect = this.designArea.getBoundingClientRect();
+        this.selectedElement.x = e.clientX - rect.left - this.dragStart.x;
+        this.selectedElement.y = e.clientY - rect.top - this.dragStart.y;
+        
+        // Limitar a los bordes del área de diseño
+        this.selectedElement.x = Math.max(0, Math.min(this.selectedElement.x, 
+          this.designArea.clientWidth - this.selectedElement.width));
+        this.selectedElement.y = Math.max(0, Math.min(this.selectedElement.y, 
+          this.designArea.clientHeight - this.selectedElement.height));
+        
+        this.renderElements();
+        this.selectElement(this.selectedElement);
+      }
+    }
+
+    private handleMouseUp() {
+      if (this.isDragging) {
+        this.isDragging = false;
+        this.saveToHistory();
+      }
+    }
+
+    private handleKeyDown(e: KeyboardEvent) {
+      if (e.key === 'Delete' && this.selectedElement) {
+        this.deleteElement(this.selectedElement.id);
+      } else if (e.key === 'Escape') {
+        this.deselectElement();
+      } else if (e.ctrlKey || e.metaKey) {
+        if (e.key === 'z') {
+          e.preventDefault();
+          this.undo();
+        } else if (e.key === 'y') {
+          e.preventDefault();
+          this.redo();
+        }
+      }
+    }
+
+    private saveToHistory() {
+      // Eliminar historial futuro si estamos en el medio
+      this.history = this.history.slice(0, this.historyIndex + 1);
+      
+      // Agregar estado actual
+      this.history.push(JSON.parse(JSON.stringify(this.elements)));
+      this.historyIndex++;
+      
+      // Limitar historial a 50 estados
+      if (this.history.length > 50) {
+        this.history.shift();
+        this.historyIndex--;
+      }
+    }
+
+    private undo() {
+      if (this.historyIndex > 0) {
+        this.historyIndex--;
+        this.elements = JSON.parse(JSON.stringify(this.history[this.historyIndex]));
+        this.renderElements();
+        this.deselectElement();
+      }
+    }
+
+    private redo() {
+      if (this.historyIndex < this.history.length - 1) {
+        this.historyIndex++;
+        this.elements = JSON.parse(JSON.stringify(this.history[this.historyIndex]));
+        this.renderElements();
+        this.deselectElement();
+      }
+    }
+
+    private zoom(factor: number) {
+      const canvas = this.canvas;
+      const currentScale = parseFloat(canvas.style.transform.replace(/scale\(([^)]+)\)/, '$1') || '1');
+      const newScale = Math.max(0.1, Math.min(3, currentScale * factor));
+      
+      canvas.style.transform = `scale(${newScale})`;
+      document.getElementById('zoom-level')!.textContent = `${Math.round(newScale * 100)}%`;
+    }
+
+    private async saveDesign() {
+      const title = (document.getElementById('design-title') as HTMLInputElement).value;
+      const description = (document.getElementById('design-description') as HTMLTextAreaElement).value;
+      
+      if (!title.trim()) {
+        alert('Por favor ingresa un título para el diseño');
+        return;
+      }
+
+      if (!this.currentProductId) {
+        alert('Por favor selecciona una camiseta');
+        return;
+      }
+
+      try {
+        const designData = {
+          elements: this.elements,
+          canvas: {
+            width: this.designArea.clientWidth,
+            height: this.designArea.clientHeight,
+            background: '#ffffff'
+          },
+          version: '1.0'
+        };
+
+        const designPayload = {
+          title,
+          description,
+          design_data: designData,
+          product_id: this.currentProductId,
+          user_id: (await supabase.auth.getUser()).data.user?.id
+        };
+
+        if (this.currentDesignId) {
+          // Actualizar diseño existente
+          await designs.update(this.currentDesignId, designPayload);
+        } else {
+          // Crear nuevo diseño
+          const { data } = await designs.create(designPayload);
+          this.currentDesignId = data?.id;
+        }
+
+        alert('Diseño guardado exitosamente');
+      } catch (error) {
+        console.error('Error saving design:', error);
+        alert('Error al guardar el diseño');
+      }
+    }
+
+    private async publishDesign() {
+      if (!this.currentDesignId) {
+        await this.saveDesign();
+      }
+
+      if (this.currentDesignId) {
+        try {
+          await designs.update(this.currentDesignId, {
+            status: 'published',
+            is_public: true
+          });
+          alert('Diseño publicado exitosamente');
+        } catch (error) {
+          console.error('Error publishing design:', error);
+          alert('Error al publicar el diseño');
+        }
+      }
+    }
+
+    private previewDesign() {
+      // Generar vista previa del diseño
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d')!;
+      canvas.width = 400;
+      canvas.height = 500;
+      
+      // Aquí se renderizaría el diseño en el canvas
+      // Por simplicidad, mostraremos una alerta
+      alert('Vista previa del diseño (funcionalidad en desarrollo)');
+    }
+
+    private generateId(): string {
+      return Math.random().toString(36).substr(2, 9);
+    }
+  }
+
+  // Inicializar editor cuando el DOM esté listo
+  let editor: DesignEditor;
+  document.addEventListener('DOMContentLoaded', () => {
+    editor = new DesignEditor();
+    // Hacer el editor globalmente accesible para los event handlers
+    (window as any).editor = editor;
+  });
+</script>
+
+<style>
+  .design-element {
+    user-select: none;
+  }
+  
+  .design-element:hover {
+    border-color: #3899B7 !important;
+  }
+  
+  #tshirt-canvas {
+    transition: transform 0.2s ease;
+  }
+</style>

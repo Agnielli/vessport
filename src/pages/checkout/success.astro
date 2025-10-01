@@ -1,0 +1,177 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Pago Exitoso - VES Sport">
+  <div id="success-app"></div>
+</Layout>
+
+<script>
+  class SuccessPage {
+    private sessionId: string | null = null;
+
+    constructor() {
+      this.getSessionId();
+      this.clearCart();
+      this.render();
+    }
+
+    private getSessionId() {
+      const urlParams = new URLSearchParams(window.location.search);
+      this.sessionId = urlParams.get('session_id');
+      
+      if (!this.sessionId) {
+        // Si no hay session ID, redirigir al inicio
+        window.location.href = '/';
+        return;
+      }
+    }
+
+    private clearCart() {
+      // Limpiar el carrito después del pago exitoso
+      localStorage.removeItem('ves-sport-cart');
+      
+      // Actualizar contador del carrito si existe
+      const cartCount = document.getElementById('cart-count');
+      if (cartCount) {
+        cartCount.classList.add('hidden');
+      }
+    }
+
+    private render() {
+      const app = document.getElementById('success-app');
+      if (!app) return;
+
+      app.innerHTML = `
+        <div class="min-h-screen bg-gray-50 py-12">
+          <div class="container mx-auto px-4">
+            <div class="max-w-2xl mx-auto">
+              <!-- Success Header -->
+              <div class="text-center mb-8">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                  </svg>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">
+                  ¡Pago Exitoso!
+                </h1>
+                <p class="text-lg text-gray-600">
+                  Tu pedido ha sido procesado correctamente
+                </p>
+              </div>
+
+              <!-- Order Details Card -->
+              <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-xl font-bold text-gray-900 mb-6">Detalles del Pedido</h2>
+                
+                <div class="space-y-4">
+                  <div class="flex items-center justify-between py-3 border-b border-gray-200">
+                    <span class="text-gray-600">ID de Sesión:</span>
+                    <span class="font-mono text-sm text-gray-900">${this.sessionId}</span>
+                  </div>
+                  
+                  <div class="flex items-center justify-between py-3 border-b border-gray-200">
+                    <span class="text-gray-600">Estado:</span>
+                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
+                      Procesando
+                    </span>
+                  </div>
+                  
+                  <div class="flex items-center justify-between py-3">
+                    <span class="text-gray-600">Fecha:</span>
+                    <span class="text-gray-900">${new Date().toLocaleDateString('es-ES')}</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Next Steps -->
+              <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h3 class="text-lg font-bold text-gray-900 mb-6">¿Qué sigue?</h3>
+                
+                <div class="space-y-4">
+                  <div class="flex items-start space-x-4">
+                    <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900">Confirmación por Email</h4>
+                      <p class="text-sm text-gray-600">
+                        Recibirás un email de confirmación con todos los detalles de tu pedido.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-start space-x-4">
+                    <div class="w-8 h-8 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <svg class="w-4 h-4 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900">Preparación del Pedido</h4>
+                      <p class="text-sm text-gray-600">
+                        Comenzaremos a preparar tu pedido inmediatamente. Los diseños personalizados pueden tomar 3-5 días adicionales.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex items-start space-x-4">
+                    <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-gray-900">Envío</h4>
+                      <p class="text-sm text-gray-600">
+                        Te notificaremos cuando tu pedido sea enviado con información de seguimiento.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Actions -->
+              <div class="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="/#productos"
+                  class="flex-1 bg-primary hover:bg-primary-dark text-white py-3 px-6 rounded-lg font-semibold text-center transition-colors"
+                >
+                  Continuar Comprando
+                </a>
+                <a
+                  href="/#contacto"
+                  class="flex-1 border border-gray-300 hover:bg-gray-50 text-gray-700 py-3 px-6 rounded-lg font-semibold text-center transition-colors"
+                >
+                  Contactar Soporte
+                </a>
+              </div>
+
+              <!-- Support -->
+              <div class="text-center mt-8 p-6 bg-blue-50 rounded-lg">
+                <h4 class="font-semibold text-gray-900 mb-2">¿Necesitas Ayuda?</h4>
+                <p class="text-sm text-gray-600 mb-3">
+                  Si tienes alguna pregunta sobre tu pedido, no dudes en contactarnos.
+                </p>
+                <a
+                  href="/#contacto"
+                  class="text-primary hover:text-primary-dark font-medium"
+                >
+                  Contactar Soporte
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  // Inicializar cuando el DOM esté listo
+  document.addEventListener('DOMContentLoaded', () => {
+    new SuccessPage();
+  });
+</script>

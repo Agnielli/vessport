@@ -1,0 +1,305 @@
+---
+// Shopping cart component with full frontend functionality
+---
+
+<!-- Cart Sidebar -->
+<div id="cart-sidebar" class="fixed inset-y-0 right-0 z-50 w-96 bg-white shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out">
+  <div class="flex flex-col h-full">
+    <!-- Cart Header -->
+    <div class="flex items-center justify-between p-6 border-b border-gray-200">
+      <h2 class="text-xl font-display font-bold text-gray-900">Carrito de Compras</h2>
+      <button id="close-cart" class="p-2 hover:bg-gray-100 rounded-lg">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Cart Items -->
+    <div id="cart-items" class="flex-1 overflow-y-auto p-6">
+      <div id="empty-cart" class="text-center py-12">
+        <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9m-9 0V19a2 2 0 002 2h7a2 2 0 002-2v-4.5M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"></path>
+        </svg>
+        <p class="text-gray-500">Tu carrito está vacío</p>
+        <p class="text-sm text-gray-400 mt-2">Agrega productos para comenzar</p>
+      </div>
+      
+      <div id="cart-list" class="space-y-4 hidden">
+        <!-- Cart items will be dynamically inserted here -->
+      </div>
+    </div>
+    
+    <!-- Cart Footer -->
+    <div id="cart-footer" class="border-t border-gray-200 p-6 hidden">
+      <div class="space-y-4">
+        <div class="flex justify-between items-center text-lg font-semibold">
+          <span>Total:</span>
+          <span id="cart-total" class="text-primary">$0</span>
+        </div>
+        
+        <button id="checkout-btn" class="w-full bg-primary hover:bg-primary-dark text-white py-3 px-6 rounded-lg font-semibold transition-colors">
+          Proceder al Pago
+        </button>
+        
+        <button id="clear-cart" class="w-full border border-gray-300 hover:bg-gray-50 text-gray-700 py-2 px-6 rounded-lg font-medium transition-colors">
+          Vaciar Carrito
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cart Overlay -->
+<div id="cart-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+<script>
+  interface CartItem {
+    id: string;
+    name: string;
+    price: number;
+    size: string;
+    quantity: number;
+  }
+
+  class ShoppingCart {
+    private items: CartItem[] = [];
+    private cartSidebar: HTMLElement;
+    private cartOverlay: HTMLElement;
+    private cartCount: HTMLElement;
+    private cartList: HTMLElement;
+    private cartTotal: HTMLElement;
+    private cartFooter: HTMLElement;
+    private emptyCart: HTMLElement;
+
+    constructor() {
+      this.cartSidebar = document.getElementById('cart-sidebar')!;
+      this.cartOverlay = document.getElementById('cart-overlay')!;
+      this.cartCount = document.getElementById('cart-count')!;
+      this.cartList = document.getElementById('cart-list')!;
+      this.cartTotal = document.getElementById('cart-total')!;
+      this.cartFooter = document.getElementById('cart-footer')!;
+      this.emptyCart = document.getElementById('empty-cart')!;
+
+      this.initEventListeners();
+      this.loadCartFromStorage();
+    }
+
+    private initEventListeners() {
+      // Cart toggle
+      document.getElementById('cart-toggle')?.addEventListener('click', () => this.openCart());
+      document.getElementById('close-cart')?.addEventListener('click', () => this.closeCart());
+      this.cartOverlay.addEventListener('click', () => this.closeCart());
+
+      // Add to cart event
+      window.addEventListener('addToCart', (e: any) => {
+        this.addItem(e.detail);
+      });
+
+      // Clear cart
+      document.getElementById('clear-cart')?.addEventListener('click', () => this.clearCart());
+
+      // Checkout
+      document.getElementById('checkout-btn')?.addEventListener('click', () => this.checkout());
+    }
+
+    private openCart() {
+      this.cartSidebar.classList.remove('translate-x-full');
+      this.cartOverlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+
+    private closeCart() {
+      this.cartSidebar.classList.add('translate-x-full');
+      this.cartOverlay.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    private addItem(item: CartItem) {
+      const existingItemIndex = this.items.findIndex(
+        i => i.productId === item.productId && 
+             i.designId === item.designId && 
+             i.size === item.size && 
+             i.color === item.color
+      );
+
+      if (existingItemIndex > -1) {
+        this.items[existingItemIndex].quantity += item.quantity;
+      } else {
+        const cartItem: CartItem = {
+          ...item,
+          id: `${item.productId}-${item.designId || 'no-design'}-${item.size}-${item.color}-${Date.now()}`
+        }
+        this.items.push(cartItem);
+      }
+
+      this.updateCart();
+      this.saveCartToStorage();
+      this.openCart();
+
+      // Show success message
+      this.showNotification(`${item.name} agregado al carrito`);
+    }
+
+    private removeItem(id: string, size: string) {
+      this.items = this.items.filter(item => !(item.id === id && item.size === size));
+      this.updateCart();
+      this.saveCartToStorage();
+    }
+
+    private updateQuantity(id: string, size: string, quantity: number) {
+      const item = this.items.find(i => i.id === id && i.size === size);
+      if (item) {
+        item.quantity = Math.max(1, quantity);
+        this.updateCart();
+        this.saveCartToStorage();
+      }
+    }
+
+    public updateQuantityPublic(id: string, quantity: number) {
+      const item = this.items.find(i => i.id === id);
+      if (item) {
+        if (quantity <= 0) {
+          this.removeItem(id);
+        } else {
+          item.quantity = quantity;
+          this.updateCart();
+          this.saveCartToStorage();
+        }
+      }
+    }
+
+    public removeItemPublic(id: string) {
+      this.removeItem(id);
+    }
+
+    private updateCart() {
+      this.updateCartCount();
+      this.updateCartDisplay();
+    }
+
+    private updateCartCount() {
+      const totalItems = this.items.reduce((sum, item) => sum + item.quantity, 0);
+      
+      if (totalItems > 0) {
+        this.cartCount.textContent = totalItems.toString();
+        this.cartCount.classList.remove('hidden');
+      } else {
+        this.cartCount.classList.add('hidden');
+      }
+    }
+
+    private updateCartDisplay() {
+      if (this.items.length === 0) {
+        this.emptyCart.classList.remove('hidden');
+        this.cartList.classList.add('hidden');
+        this.cartFooter.classList.add('hidden');
+        return;
+      }
+
+      this.emptyCart.classList.add('hidden');
+      this.cartList.classList.remove('hidden');
+      this.cartFooter.classList.remove('hidden');
+
+      // Render cart items
+      this.cartList.innerHTML = this.items.map(item => `
+        <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg">
+          <div class="w-16 h-16 bg-gradient-to-br from-primary to-primary-dark rounded-lg flex items-center justify-center">
+            <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <div class="flex-1">
+            <h4 class="font-semibold text-gray-900">${item.name}</h4>
+            <p class="text-sm text-gray-600">Talla: ${item.size}</p>
+            ${item.designId ? `
+              <p class="text-sm ${(item.designSalesCount || 0) >= 10 ? 'text-green-600' : 'text-orange-600'}">
+                ${(item.designSalesCount || 0) >= 10 ? 'Diseño gratuito ✓' : `Diseño: €80 (${item.designSalesCount || 0}/10 ventas)`}
+              </p>
+            ` : ''}
+            <p class="text-sm font-medium text-primary">$${item.price.toLocaleString()}</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button class="quantity-btn bg-white hover:bg-gray-100 w-8 h-8 rounded-lg flex items-center justify-center border" 
+                    onclick="cart.updateQuantityPublic('${item.id}', ${item.quantity - 1})">-</button>
+            <span class="w-8 text-center">${item.quantity}</span>
+            <button class="quantity-btn bg-white hover:bg-gray-100 w-8 h-8 rounded-lg flex items-center justify-center border" 
+                    onclick="cart.updateQuantityPublic('${item.id}', ${item.quantity + 1})">+</button>
+          </div>
+          <button class="text-red-500 hover:text-red-700 p-1" 
+                  onclick="cart.removeItemPublic('${item.id}')">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+            </svg>
+          </button>
+        </div>
+      `).join('');
+
+      // Update total con lógica de diseños
+      const subtotal = this.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const designFees = this.items.reduce((sum, item) => {
+        if (item.designId && (item.designSalesCount || 0) < 10) {
+          return sum + (80 * item.quantity);
+        }
+        return sum;
+      }, 0);
+      const total = subtotal + designFees;
+      this.cartTotal.textContent = `$${total.toLocaleString()}`;
+    }
+
+    private clearCart() {
+      this.items = [];
+      this.updateCart();
+      this.saveCartToStorage();
+      this.showNotification('Carrito vaciado');
+    }
+
+    private checkout() {
+      if (this.items.length === 0) return;
+
+      // TODO: Backend Integration - Stripe Payment Processing
+      // 1. Create a Stripe session with cart items
+      // 2. Redirect to Stripe checkout
+      
+      // For now, show a message
+      alert('Funcionalidad de pago en desarrollo. Por favor contacta por WhatsApp para completar tu pedido.');
+      
+      // Scroll to contact section
+      this.closeCart();
+      document.getElementById('contacto')?.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    private saveCartToStorage() {
+      localStorage.setItem('ves-sport-cart', JSON.stringify(this.items));
+    }
+
+    private loadCartFromStorage() {
+      const saved = localStorage.getItem('ves-sport-cart');
+      if (saved) {
+        this.items = JSON.parse(saved);
+        this.updateCart();
+      }
+    }
+
+    private showNotification(message: string) {
+      // Simple notification - could be enhanced with a toast library
+      const notification = document.createElement('div');
+      notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+      notification.textContent = message;
+      document.body.appendChild(notification);
+
+      setTimeout(() => {
+        notification.remove();
+      }, 3000);
+    }
+
+  }
+
+  // Initialize cart when DOM is loaded
+  let cart: ShoppingCart;
+  document.addEventListener('DOMContentLoaded', () => {
+    cart = new ShoppingCart();
+    // Make cart globally accessible for onclick handlers
+    (window as any).cart = cart;
+  });
+</script>

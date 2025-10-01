@@ -1,0 +1,318 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Carrito de Compras - VES Sport">
+  <div class="min-h-screen bg-gray-50 py-8">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-8">
+          <h1 class="text-3xl font-display font-bold text-gray-900">
+            Carrito de Compras
+          </h1>
+          <a 
+            href="/#productos" 
+            class="text-primary hover:text-primary-dark font-medium"
+          >
+            ← Continuar Comprando
+          </a>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-8">
+          <!-- Items del Carrito -->
+          <div class="lg:col-span-2">
+            <div id="cart-items-container" class="space-y-4">
+              <!-- Los items se cargarán dinámicamente -->
+            </div>
+            
+            <!-- Carrito Vacío -->
+            <div id="empty-cart-message" class="text-center py-12 hidden">
+              <svg class="w-24 h-24 text-gray-300 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m0 0h9m-9 0V19a2 2 0 002 2h7a2 2 0 002-2v-4.5M17 13v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6"></path>
+              </svg>
+              <h3 class="text-xl font-semibold text-gray-900 mb-2">Tu carrito está vacío</h3>
+              <p class="text-gray-600 mb-6">Agrega algunos productos para comenzar</p>
+              <a 
+                href="/#productos" 
+                class="inline-block bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-semibold transition-colors"
+              >
+                Ver Productos
+              </a>
+            </div>
+          </div>
+
+          <!-- Resumen del Pedido -->
+          <div id="order-summary" class="hidden">
+            <div class="bg-white rounded-xl shadow-lg p-6 sticky top-8">
+              <h2 class="text-xl font-bold text-gray-900 mb-6">Resumen del Pedido</h2>
+              
+              <div class="space-y-3 mb-6">
+                <div class="flex justify-between text-sm">
+                  <span>Subtotal:</span>
+                  <span id="subtotal">€0.00</span>
+                </div>
+                <div class="flex justify-between text-sm text-orange-600" id="design-fees-row" style="display: none;">
+                  <span>Tarifas de diseño:</span>
+                  <span id="design-fees">€0.00</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span>Envío:</span>
+                  <span id="shipping">€5.99</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span>IVA (21%):</span>
+                  <span id="tax">€0.00</span>
+                </div>
+                <div class="border-t border-gray-200 pt-3">
+                  <div class="flex justify-between text-lg font-bold">
+                    <span>Total:</span>
+                    <span id="total" class="text-primary">€0.00</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Aviso de Envío Gratuito -->
+              <div id="free-shipping-notice" class="text-sm text-gray-600 bg-blue-50 p-3 rounded-lg mb-6" style="display: none;">
+                💡 Agrega <span id="remaining-for-free-shipping">€0.00</span> más para envío gratuito
+              </div>
+
+              <!-- Botones -->
+              <div class="space-y-3">
+                <button 
+                  id="checkout-button"
+                  class="w-full bg-primary hover:bg-primary-dark text-white py-3 px-6 rounded-lg font-semibold transition-colors"
+                >
+                  Proceder al Pago
+                </button>
+                
+                <button 
+                  id="clear-cart-button"
+                  class="w-full border border-red-300 hover:bg-red-50 text-red-600 py-2 px-6 rounded-lg font-medium transition-colors"
+                >
+                  Vaciar Carrito
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  interface CartItem {
+    id: string;
+    productId: string;
+    name: string;
+    price: number;
+    size: string;
+    color?: string;
+    quantity: number;
+    designSalesCount?: number;
+  }
+
+  class CartPage {
+    private items: CartItem[] = [];
+
+    constructor() {
+      this.loadCart();
+      this.render();
+      this.setupEventListeners();
+    }
+
+    private loadCart() {
+      const saved = localStorage.getItem('ves-sport-cart');
+      if (saved) {
+        this.items = JSON.parse(saved);
+      }
+    }
+
+    private saveCart() {
+      localStorage.setItem('ves-sport-cart', JSON.stringify(this.items));
+    }
+
+    private render() {
+      const container = document.getElementById('cart-items-container');
+      const emptyMessage = document.getElementById('empty-cart-message');
+      const orderSummary = document.getElementById('order-summary');
+
+      if (this.items.length === 0) {
+        container.innerHTML = '';
+        emptyMessage.classList.remove('hidden');
+        orderSummary.classList.add('hidden');
+        return;
+      }
+
+      emptyMessage.classList.add('hidden');
+      orderSummary.classList.remove('hidden');
+
+      // Renderizar items
+      container.innerHTML = this.items.map(item => `
+        <div class="bg-white rounded-xl shadow-lg p-6">
+          <div class="flex items-start space-x-4">
+            <!-- Imagen del Producto -->
+            <div class="w-24 h-24 bg-gradient-to-br from-primary to-primary-dark rounded-lg flex items-center justify-center flex-shrink-0">
+              <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+              </svg>
+            </div>
+
+            <!-- Información del Producto -->
+            <div class="flex-1 min-w-0">
+              <h3 class="text-lg font-semibold text-gray-900 mb-1">${item.name}</h3>
+              <div class="text-sm text-gray-600 space-y-1">
+                <p>Talla: ${item.size}${item.color ? ` | Color: ${item.color}` : ''}</p>
+                ${item.designSalesCount !== undefined ? `
+                  <p class="${(item.designSalesCount || 0) >= 10 ? 'text-green-600' : 'text-orange-600'}">
+                    ${(item.designSalesCount || 0) >= 10 ? 'Diseño gratuito ✓' : `Diseño: €80 (${item.designSalesCount || 0}/10 ventas)`}
+                  </p>
+                ` : ''}
+                <p class="font-medium text-primary">€${item.price.toFixed(2)} c/u</p>
+              </div>
+            </div>
+
+            <!-- Controles de Cantidad -->
+            <div class="flex items-center space-x-3">
+              <button 
+                class="w-8 h-8 border border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-50"
+                onclick="cartPage.updateQuantity('${item.id}', ${item.quantity - 1})"
+              >
+                -
+              </button>
+              <span class="w-8 text-center font-medium">${item.quantity}</span>
+              <button 
+                class="w-8 h-8 border border-gray-300 rounded-lg flex items-center justify-center hover:bg-gray-50"
+                onclick="cartPage.updateQuantity('${item.id}', ${item.quantity + 1})"
+              >
+                +
+              </button>
+            </div>
+
+            <!-- Precio Total y Eliminar -->
+            <div class="text-right">
+              <p class="text-lg font-bold text-gray-900 mb-2">
+                €${(item.price * item.quantity + (item.designSalesCount !== undefined && item.designSalesCount < 10 ? 80 * item.quantity : 0)).toFixed(2)}
+              </p>
+              <button 
+                class="text-red-500 hover:text-red-700 p-1"
+                onclick="cartPage.removeItem('${item.id}')"
+              >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+
+      this.updateSummary();
+    }
+
+    private updateSummary() {
+      const subtotal = this.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      const designFees = this.items.reduce((sum, item) => {
+        if (item.designSalesCount !== undefined && item.designSalesCount < 10) {
+          return sum + (80 * item.quantity);
+        }
+        return sum;
+      }, 0);
+      const shipping = subtotal >= 50 ? 0 : 5.99;
+      const tax = (subtotal + designFees + shipping) * 0.21;
+      const total = subtotal + designFees + shipping + tax;
+
+      document.getElementById('subtotal').textContent = `€${subtotal.toFixed(2)}`;
+      document.getElementById('design-fees').textContent = `€${designFees.toFixed(2)}`;
+      document.getElementById('shipping').textContent = shipping === 0 ? 'Gratis' : `€${shipping.toFixed(2)}`;
+      document.getElementById('tax').textContent = `€${tax.toFixed(2)}`;
+      document.getElementById('total').textContent = `€${total.toFixed(2)}`;
+
+      // Mostrar/ocultar fila de tarifas de diseño
+      const designFeesRow = document.getElementById('design-fees-row');
+      if (designFees > 0) {
+        designFeesRow.style.display = 'flex';
+      } else {
+        designFeesRow.style.display = 'none';
+      }
+
+      // Aviso de envío gratuito
+      const freeShippingNotice = document.getElementById('free-shipping-notice');
+      const remainingSpan = document.getElementById('remaining-for-free-shipping');
+      
+      if (subtotal < 50 && subtotal > 0) {
+        const remaining = 50 - subtotal;
+        remainingSpan.textContent = `€${remaining.toFixed(2)}`;
+        freeShippingNotice.style.display = 'block';
+      } else {
+        freeShippingNotice.style.display = 'none';
+      }
+    }
+
+    public updateQuantity(id: string, newQuantity: number) {
+      if (newQuantity <= 0) {
+        this.removeItem(id);
+        return;
+      }
+
+      const item = this.items.find(i => i.id === id);
+      if (item) {
+        item.quantity = newQuantity;
+        this.saveCart();
+        this.render();
+        this.updateCartCounter();
+      }
+    }
+
+    public removeItem(id: string) {
+      this.items = this.items.filter(i => i.id !== id);
+      this.saveCart();
+      this.render();
+      this.updateCartCounter();
+    }
+
+    public clearCart() {
+      if (confirm('¿Estás seguro de que quieres vaciar el carrito?')) {
+        this.items = [];
+        this.saveCart();
+        this.render();
+        this.updateCartCounter();
+      }
+    }
+
+    private updateCartCounter() {
+      const cartCount = document.getElementById('cart-count');
+      const totalItems = this.items.reduce((sum, item) => sum + item.quantity, 0);
+      
+      if (cartCount) {
+        if (totalItems > 0) {
+          cartCount.textContent = totalItems.toString();
+          cartCount.classList.remove('hidden');
+        } else {
+          cartCount.classList.add('hidden');
+        }
+      }
+    }
+
+    private setupEventListeners() {
+      document.getElementById('checkout-button')?.addEventListener('click', () => {
+        if (this.items.length > 0) {
+          window.location.href = '/checkout/payment';
+        }
+      });
+
+      document.getElementById('clear-cart-button')?.addEventListener('click', () => {
+        this.clearCart();
+      });
+    }
+  }
+
+  // Inicializar página del carrito
+  let cartPage: CartPage;
+  document.addEventListener('DOMContentLoaded', () => {
+    cartPage = new CartPage();
+    // Hacer disponible globalmente para los onclick handlers
+    (window as any).cartPage = cartPage;
+  });
+</script>
