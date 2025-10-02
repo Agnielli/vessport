@@ -6,11 +6,26 @@ export default {
       colors: {
         primary: '#3899B7',
         'primary-dark': '#2a7a94',
+        blue: '#001689',
+        red: '#bd302c',
+        yellow: '#f4c400',
+        ocean: {
+          50: '#f0f9ff',
+          100: '#e0f2fe',
+          200: '#bae6fd',
+          300: '#7dd3fc',
+          400: '#38bdf8',
+          500: '#0ea5e9',
+          600: '#0284c7',
+          700: '#0369a1',
+          800: '#075985',
+          900: '#0c4a6e',
+        },
       },
       fontFamily: {
-        'display': ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        'body': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        'sans': ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        display: ['Montserrat', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        body: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 1s ease-out',
@@ -26,4 +41,4 @@ export default {
     },
   },
   plugins: [],
-}
+};
