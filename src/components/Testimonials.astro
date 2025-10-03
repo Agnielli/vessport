@@ -1,0 +1,169 @@
+---
+// Sección de testimonios de clientes
+const testimonials = [
+  {
+    id: 1,
+    name: "Carlos Martínez",
+    organization: "Club Deportivo Almería",
+    role: "Presidente",
+    testimonial: "Las camisetas que nos hizo VES Sport superaron todas nuestras expectativas. La calidad del full-print es excepcional y el servicio al cliente fue impecable. Nuestros jugadores están encantados con el resultado.",
+    rating: 5,
+    image: null
+  },
+  {
+    id: 2,
+    name: "María González",
+    organization: "Maratón Costa del Sol",
+    role: "Organizadora",
+    testimonial: "Trabajamos con VES Sport para nuestro evento anual y el resultado fue fantástico. Entregaron 500 camisetas en tiempo récord y la calidad fue consistente en todas. Definitivamente repetiremos.",
+    rating: 5,
+    image: null
+  },
+  {
+    id: 3,
+    name: "Antonio Ruiz",
+    organization: "Hermandad del Rocío",
+    role: "Hermano Mayor",
+    testimonial: "Necesitábamos camisetas especiales para nuestra peregrinación y VES Sport entendió perfectamente nuestras necesidades. El diseño respetó nuestras tradiciones y la calidad fue excelente.",
+    rating: 5,
+    image: null
+  },
+  {
+    id: 4,
+    name: "Laura Fernández",
+    organization: "Asociación Vecinal San Miguel",
+    role: "Secretaria",
+    testimonial: "Para nuestras fiestas del barrio necesitábamos camisetas que identificaran a los voluntarios. VES Sport nos ofreció un precio muy competitivo y un servicio personalizado excepcional.",
+    rating: 5,
+    image: null
+  },
+  {
+    id: 5,
+    name: "José Luis Pérez",
+    organization: "Empresa Construcciones del Sur",
+    role: "Gerente",
+    testimonial: "Buscábamos uniformes corporativos de calidad para nuestro equipo. VES Sport nos proporcionó camisetas duraderas y cómodas que han resistido perfectamente el uso diario en obra.",
+    rating: 5,
+    image: null
+  },
+  {
+    id: 6,
+    name: "Carmen Jiménez",
+    organization: "Equipo Femenino Voleibol Garrucha",
+    role: "Capitana",
+    testimonial: "Como equipo femenino, queríamos camisetas que fueran tanto funcionales como estéticamente atractivas. VES Sport logró el equilibrio perfecto y nos sentimos geniales jugando con ellas.",
+    rating: 5,
+    image: null
+  }
+];
+---
+
+<section id="testimonios" class="py-20 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2
+        class="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4"
+      >
+        Lo que Opinan Nuestros Clientes
+      </h2>
+      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+        La satisfacción de nuestros clientes es nuestra mejor carta de presentación
+      </p>
+    </div>
+
+    <!-- Grid de testimonios -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+      {testimonials.map((testimonial) => (
+        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <!-- Rating stars -->
+          <div class="flex items-center mb-4">
+            {Array.from({ length: testimonial.rating }, (_, i) => (
+              <svg key={i} class="w-5 h-5 text-yellow-400 fill-current" viewBox="0 0 24 24">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+              </svg>
+            ))}
+          </div>
+
+          <!-- Testimonial text -->
+          <blockquote class="text-gray-700 mb-6 leading-relaxed">
+            "{testimonial.testimonial}"
+          </blockquote>
+
+          <!-- Client info -->
+          <div class="flex items-center">
+            <div class="w-12 h-12 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center mr-4">
+              <span class="text-white font-semibold text-lg">
+                {testimonial.name.charAt(0)}
+              </span>
+            </div>
+            <div>
+              <div class="font-semibold text-gray-900">{testimonial.name}</div>
+              <div class="text-sm text-gray-600">{testimonial.role}</div>
+              <div class="text-sm text-primary font-medium">{testimonial.organization}</div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Estadísticas de satisfacción -->
+    <div class="bg-white rounded-xl shadow-lg p-8">
+      <div class="grid md:grid-cols-4 gap-8 text-center">
+        <div>
+          <div class="text-3xl font-bold text-primary mb-2">500+</div>
+          <div class="text-gray-600">Clientes Satisfechos</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-primary mb-2">15K+</div>
+          <div class="text-gray-600">Camisetas Entregadas</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-primary mb-2">98%</div>
+          <div class="text-gray-600">Satisfacción del Cliente</div>
+        </div>
+        <div>
+          <div class="text-3xl font-bold text-primary mb-2">10+</div>
+          <div class="text-gray-600">Años de Experiencia</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Call to action -->
+    <div class="text-center mt-12">
+      <p class="text-gray-600 mb-6">
+        ¿Quieres ser nuestro próximo cliente satisfecho?
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="#contacto"
+          class="bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+        >
+          Solicita tu Presupuesto
+        </a>
+        <a
+          href="#productos"
+          class="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+        >
+          Ver Nuestros Productos
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  blockquote {
+    position: relative;
+  }
+  
+  blockquote::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    font-size: 3rem;
+    color: #3899B7;
+    opacity: 0.3;
+    font-family: serif;
+  }
+</style>
