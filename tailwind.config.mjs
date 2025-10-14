@@ -31,6 +31,7 @@ export default {
         'fade-in': 'fadeIn 1s ease-out',
         'fade-in-delay': 'fadeIn 1s ease-out 0.3s both',
         'fade-in-delay-2': 'fadeIn 1s ease-out 0.6s both',
+        beat: 'beat 2s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -41,9 +42,6 @@ export default {
           '0%, 100%': { transform: 'scale(1)' },
           '50%': { transform: 'scale(1.2)' },
         },
-      },
-      animation: {
-        beat: 'beat 2s ease-in-out infinite',
       },
       spacing: {
         18: '4.5rem',

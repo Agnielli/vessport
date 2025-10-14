@@ -1,7 +1,3 @@
----
-// Contact form with validation
----
-
 <section id="contacto" class="py-20 bg-white">
   <div class="container mx-auto px-4">
     <div class="max-w-7xl mx-auto">
@@ -18,7 +14,6 @@
       </div>
 
       <div class="grid lg:grid-cols-5 gap-12">
-        <!-- Contact Information -->
         <div class="space-y-8 lg:col-span-2">
           <div>
             <h3 class="text-2xl font-display font-bold text-gray-900 mb-6">
@@ -126,7 +121,7 @@
                   <h4 class="font-semibold text-gray-900 mb-1">WhatsApp</h4>
                   <p class="text-gray-600">+34693938377</p>
                   <a
-                    href="https://wa.me/573001234567"
+                    href="https://wa.me/34693938377"
                     target="_blank"
                     class="inline-flex items-center text-green-500 hover:text-green-600 text-sm font-medium"
                   >
@@ -151,123 +146,189 @@
           </div>
         </div>
 
-        <!-- Contact Form -->
         <div class="bg-gray-50 p-8 rounded-xl lg:col-span-3">
           <h3 class="text-xl font-display font-bold text-gray-900 mb-6">
             Envíanos un Mensaje
           </h3>
 
-          <form id="contact-form" class="space-y-6">
-            <div class="grid md:grid-cols-2 gap-6">
+          <div id="form-wrapper">
+            <form id="contactForm" class="space-y-6">
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    for="name"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                    >Nombre Completo *</label
+                  >
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="Tu nombre completo"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="email"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                    >Email *</label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="tu@email.com"
+                  />
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label
+                    for="phone"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                    >Teléfono</label
+                  >
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="+34693938377"
+                  />
+                </div>
+                <div>
+                  <label
+                    for="team"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                    >Nombre del Equipo</label
+                  >
+                  <input
+                    type="text"
+                    id="team"
+                    name="team"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+                    placeholder="Nombre de tu equipo"
+                  />
+                </div>
+              </div>
+
               <div>
                 <label
-                  for="name"
+                  for="message"
                   class="block text-sm font-medium text-gray-700 mb-2"
+                  >Mensaje *</label
                 >
-                  Nombre Completo *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
                   required
                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  placeholder="Tu nombre completo"
-                />
+                  placeholder="Cuéntanos sobre tu proyecto, cantidad de camisetas, diseño deseado, etc."
+                ></textarea>
               </div>
 
-              <div>
-                <label
-                  for="email"
-                  class="block text-sm font-medium text-gray-700 mb-2"
+              <!-- <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2"
+                  >Adjuntar Imágenes (Opcional)</label
                 >
-                  Email *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  placeholder="tu@email.com"
-                />
-              </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-6">
-              <div>
-                <label
-                  for="phone"
-                  class="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  Teléfono
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  placeholder="+34693938377"
-                />
-              </div>
-
-              <div>
-                <label
-                  for="team"
-                  class="block text-sm font-medium text-gray-700 mb-2"
-                >
-                  Nombre del Colectivo / Equipo
-                </label>
-                <input
-                  type="text"
-                  id="team"
-                  name="team"
-                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                  placeholder="Nombre de tu equipo"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label
-                for="message"
-                class="block text-sm font-medium text-gray-700 mb-2"
-              >
-                Mensaje *
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows="4"
-                required
-                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
-                placeholder="Cuéntanos sobre tu proyecto, cantidad de camisetas, diseño deseado, etc."
-              ></textarea>
-            </div>
-
-            <!-- Subida de imágenes -->
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">
-                Adjuntar Imágenes (Opcional)
-              </label>
-              <div
-                class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition-colors"
-              >
-                <input
-                  type="file"
-                  id="images"
-                  name="images"
-                  multiple
-                  accept="image/*"
-                  class="hidden"
-                />
                 <div
                   id="upload-area"
-                  class="cursor-pointer"
-                  onclick="document.getElementById('images').click()"
+                  class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-primary transition-colors cursor-pointer"
+                >
+                  <input
+                    type="file"
+                    id="images"
+                    name="images"
+                    multiple
+                    accept="image/*"
+                    class="hidden"
+                  />
+                  <div onclick="document.getElementById('images').click()">
+                    <svg
+                      class="w-12 h-12 text-gray-400 mx-auto mb-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
+                      ></path>
+                    </svg>
+                    <p class="text-gray-600 mb-2">
+                      Arrastra imágenes aquí o haz clic para seleccionar
+                    </p>
+                    <p class="text-sm text-gray-500">
+                      PNG, JPG, GIF hasta 10MB cada una
+                    </p>
+                  </div>
+                  <div
+                    id="image-preview"
+                    class="mt-4 grid grid-cols-2 gap-4 hidden"
+                  >
+                  </div>
+                </div>
+              </div> -->
+
+              <div>
+                <label
+                  for="captcha-input"
+                  class="block text-sm font-medium text-gray-700 mb-2"
+                >
+                  Verificación de Seguridad *
+                </label>
+                <div class="flex space-x-4 items-center">
+                  <div
+                    id="captcha-display"
+                    class="px-4 py-2 bg-gray-200 text-lg font-mono tracking-widest rounded-lg select-none font-bold"
+                  >
+                  </div>
+                  <input
+                    type="text"
+                    id="captcha-input"
+                    name="captcha-input"
+                    required
+                    maxlength="3"
+                    pattern="[A-Z]{3}"
+                    oninput="this.value = this.value.toUpperCase()"
+                    class="uppercase w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent md:w-1/2"
+                    placeholder="Escribe las 3 letras"
+                  />
+                </div>
+                <p id="captcha-error" class="text-sm text-red-500 mt-1 hidden">
+                  El código CAPTCHA es incorrecto.
+                </p>
+              </div>
+              <button
+                type="submit"
+                id="submitButton"
+                class="w-full bg-primary hover:bg-primary-dark text-white py-3 px-6 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2"
+              >
+                <span>Enviar Mensaje</span>
+              </button>
+            </form>
+          </div>
+
+          <div id="confirmation-message" class="hidden text-center py-12">
+            <div
+              id="success-message"
+              class="hidden bg-green-50 border border-green-200 text-green-700 p-6 rounded-lg mb-6"
+            >
+              <h4 class="text-2xl font-bold mb-3">¡Mensaje Recibido! 🎉</h4>
+              <div class="mb-8">
+                <div
+                  class="mx-auto w-24 h-24 bg-green-100 rounded-full flex items-center justify-center"
                 >
                   <svg
-                    class="w-12 h-12 text-gray-400 mx-auto mb-4"
+                    class="w-12 h-12 text-green-600"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -275,32 +336,39 @@
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                    ></path>
+                      stroke-width="3"
+                      d="M5 13l4 4L19 7"></path>
                   </svg>
-                  <p class="text-gray-600 mb-2">
-                    Arrastra imágenes aquí o haz clic para seleccionar
-                  </p>
-                  <p class="text-sm text-gray-500">
-                    PNG, JPG, GIF hasta 10MB cada una
-                  </p>
-                </div>
-                <div
-                  id="image-preview"
-                  class="mt-4 grid grid-cols-2 gap-4 hidden"
-                >
                 </div>
               </div>
+              <p class="mt-4">
+                Tu solicitud ha sido enviada con éxito. Revisaremos tu
+                información y te contactaremos en un plazo máximo de 24 horas.
+              </p>
+              <p class="mt-6 text-sm text-green-600">
+                Gracias por contactar con Vessport.
+              </p>
+            </div>
+
+            <div
+              id="error-message"
+              class="hidden bg-red-50 border border-red-200 text-red-700 p-6 rounded-lg mb-6"
+            >
+              <h4 class="text-2xl font-bold mb-3">Error al Enviar 😔</h4>
+              <p>
+                No pudimos completar tu solicitud. Por favor, revisa tu conexión
+                e inténtalo de nuevo.
+              </p>
+              <p class="mt-2 text-sm text-red-600" id="error-details"></p>
             </div>
 
             <button
-              type="submit"
-              class="w-full bg-primary hover:bg-primary-dark text-white py-3 px-6 rounded-lg font-semibold transition-colors"
+              onclick="window.resetForm()"
+              class="mt-4 bg-gray-200 hover:bg-gray-300 text-gray-800 py-2 px-4 rounded-lg font-semibold transition-colors"
             >
-              Enviar Mensaje
+              Enviar otro mensaje
             </button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
@@ -308,19 +376,301 @@
 </section>
 
 <script>
+  // Variables globales
+  window.selectedImages = [];
+  window.currentCaptcha = '';
+
+  // Generar CAPTCHA
+  window.generateCaptcha = function () {
+    const captchaDisplay = document.getElementById('captcha-display');
+    const captchaInput = document.getElementById('captcha-input');
+    const captchaError = document.getElementById('captcha-error');
+
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let result = '';
+    for (let i = 0; i < 3; i++) {
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
+    }
+    window.currentCaptcha = result;
+    captchaDisplay.textContent = result;
+    if (captchaInput) captchaInput.value = '';
+    if (captchaError) captchaError.classList.add('hidden');
+  };
+
+  // Función para actualizar el preview de imágenes
+  window.updateImagePreview = function () {
+    const imagePreview = document.getElementById('image-preview');
+    if (!imagePreview) return;
+
+    if (window.selectedImages.length > 0) {
+      imagePreview.classList.remove('hidden');
+      imagePreview.innerHTML = window.selectedImages
+        .map(
+          (file, index) => `
+        <div class="relative">
+          <img src="${URL.createObjectURL(file)}" class="w-full h-32 object-cover rounded-lg" alt="Preview ${index + 1}" />
+          <button type="button" onclick="window.removeImage(${index})"
+            class="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600">×</button>
+        </div>
+      `
+        )
+        .join('');
+    } else {
+      imagePreview.classList.add('hidden');
+      imagePreview.innerHTML = '';
+    }
+  };
+
+  // Función para remover imágenes
+  window.removeImage = function (index) {
+    window.selectedImages.splice(index, 1);
+    window.updateImagePreview();
+  };
+
+  // Función para resetear el formulario
+  window.resetForm = function () {
+    const form = document.getElementById('contactForm');
+    const formWrapper = document.getElementById('form-wrapper');
+    const confirmationMessage = document.getElementById('confirmation-message');
+    const imagePreview = document.getElementById('image-preview');
+
+    if (form) form.reset();
+    window.selectedImages = [];
+
+    if (imagePreview) {
+      imagePreview.classList.add('hidden');
+      imagePreview.innerHTML = '';
+    }
+
+    window.generateCaptcha();
+
+    if (formWrapper) formWrapper.classList.remove('hidden');
+    if (confirmationMessage) confirmationMessage.classList.add('hidden');
+  };
+
+  // Inicialización cuando el DOM esté listo
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contactForm');
+    const formWrapper = document.getElementById('form-wrapper');
+    const confirmationMessage = document.getElementById('confirmation-message');
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+    const submitButton = document.getElementById('submitButton');
+    const imageInput = document.getElementById('images');
+    const imagePreview = document.getElementById('image-preview');
+
+    // Generar CAPTCHA inicial
+    window.generateCaptcha();
+
+    // Manejar selección de imágenes
+    if (imageInput) {
+      imageInput.addEventListener('change', (e) => {
+        const files = Array.from(e.target.files);
+        window.selectedImages = files;
+        window.updateImagePreview();
+      });
+    }
+
+    // Manejar envío del formulario
+    if (form) {
+      form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const captchaInput = document.getElementById('captcha-input');
+        const captchaError = document.getElementById('captcha-error');
+        const isCaptchaValid = captchaInput.value === window.currentCaptcha;
+
+        // Verificar CAPTCHA
+        if (!isCaptchaValid) {
+          if (captchaError) captchaError.classList.remove('hidden');
+          if (captchaInput) captchaInput.value = '';
+          window.generateCaptcha();
+          if (submitButton) {
+            submitButton.innerHTML = `<span>Enviar Mensaje</span>`;
+            submitButton.disabled = false;
+          }
+          return;
+        }
+
+        if (captchaError) captchaError.classList.add('hidden');
+
+        // Mostrar estado de carga
+        if (submitButton) {
+          submitButton.innerHTML = `
+            <span>Enviando...</span>
+            <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 100 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"></path>
+            </svg>
+          `;
+          submitButton.disabled = true;
+        }
+
+        // Recopilar datos del formulario
+        const formData = {
+          name: document.getElementById('name')?.value || '',
+          email: document.getElementById('email')?.value || '',
+          phone: document.getElementById('phone')?.value || '',
+          team: document.getElementById('team')?.value || '',
+          message: document.getElementById('message')?.value || '',
+        };
+
+        try {
+          // Codificar imágenes en Base64
+          const encodedImages = await Promise.all(
+            window.selectedImages.map(
+              (file) =>
+                new Promise((resolve, reject) => {
+                  const reader = new FileReader();
+                  reader.onload = () =>
+                    resolve({
+                      data: reader.result.split(',')[1],
+                      mimeType: file.type,
+                      name: file.name,
+                    });
+                  reader.onerror = (error) => reject(error);
+                  reader.readAsDataURL(file);
+                })
+            )
+          );
+
+          console.log('Imágenes codificadas:', encodedImages.length);
+
+          // Construir URL con parámetros
+          const url = new URL(
+            'https://script.google.com/macros/s/AKfycbwBq2GOchh5GT-E94BxShXXOG_wOPzuR1xR6TAdXP1t83UmVAn6dBckK3sQ4tDhkKZWHw/exec'
+          );
+
+          Object.entries(formData).forEach(([key, value]) => {
+            url.searchParams.set(key, value);
+          });
+
+          if (encodedImages.length > 0) {
+            const imagesPayload = encodeURIComponent(
+              JSON.stringify(encodedImages)
+            );
+            url.searchParams.set('images', imagesPayload);
+            console.log('Payload de imágenes añadido a la URL');
+          }
+
+          console.log('Enviando solicitud...');
+
+          const res = await fetch(url.toString());
+          const data = await res.json();
+
+          console.log('Respuesta del servidor:', data);
+
+          // Ocultar formulario y mostrar mensaje de éxito
+          if (formWrapper) formWrapper.classList.add('hidden');
+          if (confirmationMessage)
+            confirmationMessage.classList.remove('hidden');
+          if (successMessage) successMessage.classList.remove('hidden');
+          if (errorMessage) errorMessage.classList.add('hidden');
+        } catch (err) {
+          console.error('Error al enviar:', err);
+
+          // Ocultar formulario y mostrar mensaje de error
+          if (formWrapper) formWrapper.classList.add('hidden');
+          if (confirmationMessage)
+            confirmationMessage.classList.remove('hidden');
+          if (successMessage) successMessage.classList.add('hidden');
+          if (errorMessage) {
+            errorMessage.classList.remove('hidden');
+            const errorDetails = document.getElementById('error-details');
+            if (errorDetails) errorDetails.textContent = err.message;
+          }
+        } finally {
+          if (submitButton) {
+            submitButton.innerHTML = `<span>Enviar Mensaje</span>`;
+            submitButton.disabled = false;
+          }
+          window.generateCaptcha();
+        }
+      });
+    }
+  });
+</script>
+
+<!-- <script is:inline>
+  // 🚨 1. LÓGICA DE RESETEO Y CAPTCHA GLOBAL
+  // Se hace global para que el botón "Enviar otro mensaje" funcione.
+  window.selectedImages = [];
+  window.currentCaptcha = '';
+
+  window.generateCaptcha = function () {
+    const captchaDisplay = document.getElementById('captcha-display');
+    const captchaInput = document.getElementById('captcha-input');
+    const captchaError = document.getElementById('captcha-error');
+
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let result = '';
+    for (let i = 0; i < 3; i++) {
+      result += characters.charAt(
+        Math.floor(Math.random() * characters.length)
+      );
+    }
+    window.currentCaptcha = result;
+    captchaDisplay.textContent = result;
+    captchaInput.value = '';
+    captchaError.classList.add('hidden');
+  };
+
+  // Función global para remover imágenes (Intacta)
+  window.removeImage = function (index) {
+    window.selectedImages.splice(index, 1);
+    updateImagePreview();
+  };
+
+  // 🚨 2. FUNCIÓN DE RESETEO DEL FORMULARIO
+  window.resetForm = function () {
+    const contactForm = document.getElementById('contact-form');
+    const formWrapper = document.getElementById('form-wrapper');
+    const confirmationMessage = document.getElementById('confirmation-message');
+    const imagePreview = document.getElementById('image-preview');
+
+    // Limpiar el formulario
+    contactForm.reset();
+
+    // Limpiar imágenes y preview
+    window.selectedImages = [];
+    imagePreview.classList.add('hidden');
+    imagePreview.innerHTML = '';
+
+    // Regenerar CAPTCHA
+    window.generateCaptcha();
+
+    // Mostrar formulario y ocultar mensajes
+    formWrapper.classList.remove('hidden');
+    confirmationMessage.classList.add('hidden');
+  };
+
   document.addEventListener('DOMContentLoaded', function () {
-    const contactForm = document.getElementById(
-      'contact-form'
-    ) as HTMLFormElement;
-    const imageInput = document.getElementById('images') as HTMLInputElement;
-    const imagePreview = document.getElementById(
-      'image-preview'
-    ) as HTMLElement;
-    const uploadArea = document.getElementById('upload-area') as HTMLElement;
+    const contactForm = document.getElementById('contact-form');
+    const formWrapper = document.getElementById('form-wrapper');
+    const confirmationMessage = document.getElementById('confirmation-message');
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+    const errorDetails = document.getElementById('error-details');
 
-    let selectedImages: File[] = [];
+    const imageInput = document.getElementById('images');
+    const imagePreview = document.getElementById('image-preview');
+    const uploadArea = document.getElementById('upload-area');
+    const captchaInput = document.getElementById('captcha-input');
+    const captchaError = document.getElementById('captcha-error');
+    const submitButton = document.getElementById('submit-button');
 
-    // Manejo de drag and drop
+    // ⚠️ Reemplaza esta URL con la tuya
+    const GAS_URL =
+      'https://script.google.com/macros/s/AKfycby62uWeiyM67dhhgAJIOQHek8b3AnULbYjojT2jhc2JVCk_EGva8NgL66pItiA8TiZcqg/exec';
+
+    let selectedImages = window.selectedImages;
+
+    // Inicializar CAPTCHA
+    window.generateCaptcha();
+
+    // 3. Manejo de Drag and Drop (Intacto)
     uploadArea.addEventListener('dragover', (e) => {
       e.preventDefault();
       uploadArea.classList.add('border-primary', 'bg-blue-50');
@@ -334,26 +684,23 @@
     uploadArea.addEventListener('drop', (e) => {
       e.preventDefault();
       uploadArea.classList.remove('border-primary', 'bg-blue-50');
-
       const files = Array.from(e.dataTransfer?.files || []);
       handleImageSelection(files);
     });
 
-    // Manejo de selección de archivos
+    // 4. Manejo de selección de archivos y preview (Intacto)
     imageInput.addEventListener('change', (e) => {
-      const files = Array.from((e.target as HTMLInputElement).files || []);
+      const files = Array.from(e.target.files || []);
       handleImageSelection(files);
     });
 
-    function handleImageSelection(files: File[]) {
-      // Filtrar solo imágenes y limitar tamaño
+    function handleImageSelection(files) {
       const validImages = files.filter((file) => {
         if (!file.type.startsWith('image/')) {
           alert(`${file.name} no es una imagen válida`);
           return false;
         }
         if (file.size > 10 * 1024 * 1024) {
-          // 10MB
           alert(`${file.name} es demasiado grande (máximo 10MB)`);
           return false;
         }
@@ -362,11 +709,13 @@
 
       selectedImages = [...selectedImages, ...validImages];
       updateImagePreview();
+      imageInput.value = '';
     }
 
     function updateImagePreview() {
       if (selectedImages.length === 0) {
         imagePreview.classList.add('hidden');
+        imagePreview.innerHTML = '';
         return;
       }
 
@@ -374,84 +723,125 @@
       imagePreview.innerHTML = selectedImages
         .map(
           (file, index) => `
-        <div class="relative">
-          <img 
-            src="${URL.createObjectURL(file)}" 
-            alt="Preview ${index + 1}"
-            class="w-full h-24 object-cover rounded-lg border border-gray-300"
-          />
-          <button 
-            type="button"
-            onclick="removeImage(${index})"
-            class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600"
-          >
-            ×
-          </button>
-          <p class="text-xs text-gray-600 mt-1 truncate">${file.name}</p>
-        </div>
-      `
+                    <div class="relative">
+                        <img
+                            src="${URL.createObjectURL(file)}"
+                            alt="Preview ${index + 1}"
+                            class="w-full h-24 object-cover rounded-lg border border-gray-300"
+                        />
+                        <button
+                            type="button"
+                            onclick="window.removeImage(${index})"
+                            class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-600"
+                        >
+                            ×
+                        </button>
+                        <p class="text-xs text-gray-600 mt-1 truncate">${file.name}</p>
+                    </div>
+                `
         )
         .join('');
     }
 
-    // Función global para remover imágenes
-    (window as any).removeImage = (index: number) => {
-      selectedImages.splice(index, 1);
-      updateImagePreview();
-    };
-
+    // 5. Envío del Formulario (Lógica robusta de fetch y manejo visual)
     contactForm.addEventListener('submit', async function (e) {
       e.preventDefault();
 
-      const formData = new FormData(contactForm);
-
-      // Agregar imágenes al FormData
-      selectedImages.forEach((file, index) => {
-        formData.append(`image_${index}`, file);
-      });
-
-      const data = Object.fromEntries(formData.entries());
-
-      // Basic validation
-      if (!data.name || !data.email || !data.message) {
-        alert('Por favor completa todos los campos obligatorios.');
+      // Validación CAPTCHA
+      if (captchaInput.value.toUpperCase() !== window.currentCaptcha) {
+        captchaError.classList.remove('hidden');
+        window.generateCaptcha();
         return;
       }
+      captchaError.classList.add('hidden');
 
-      // Email validation
+      const formData = new FormData(contactForm);
+
+      // Validación de campos obligatorios
+      if (
+        !formData.get('name') ||
+        !formData.get('email') ||
+        !formData.get('message')
+      ) {
+        alert('Por favor completa todos los campos obligatorios (*).');
+        return;
+      }
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(data.email as string)) {
+      if (!emailRegex.test(formData.get('email'))) {
         alert('Por favor ingresa un email válido.');
         return;
       }
 
+      const data = Object.fromEntries(formData.entries());
+
+      // Codificar Imágenes a Base64
+      const imagePromises = selectedImages.map((file) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () =>
+            resolve({
+              data: reader.result.split(',')[1],
+              mimeType: file.type,
+              name: file.name,
+            });
+          reader.onerror = (error) => reject(error);
+          reader.readAsDataURL(file);
+        });
+      });
+
+      // Mostrar Spinner y deshabilitar botón
+      submitButton.innerHTML = `
+        <span>Enviando...</span>
+        <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4l3-3-3-3v4a8 8 0 100 16v-4l-3 3 3 3v-4a8 8 0 01-8-8z"></path>
+        </svg>
+      `;
+      submitButton.disabled = true;
+
       try {
-        // Enviar formulario con imágenes
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          body: formData, // Usar FormData para enviar archivos
+        const encodedImages = await Promise.all(imagePromises);
+        data.images = encodedImages;
+        delete data['captcha-input'];
+
+        // Enviar Petición POST con JSON
+        const response = await fetch(GAS_URL, {
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
         });
 
-        if (response.ok) {
-          alert('¡Mensaje enviado exitosamente! Te contactaremos pronto.');
-          contactForm.reset();
-          selectedImages = [];
-          updateImagePreview();
-        } else {
-          throw new Error('Error al enviar el mensaje');
+        if (!response.ok) {
+          throw new Error(`Error HTTP: ${response.status}`);
         }
 
-        // Optional: Redirect to WhatsApp with pre-filled message
-        // const whatsappMessage = encodeURIComponent(
-        //   `Hola! Soy ${data.name}. ${data.message}`
-        // );
-        // window.open(`https://wa.me/573001234567?text=${whatsappMessage}`, '_blank');
+        const result = await response.json();
+
+        // Manejo de respuesta de éxito
+        if (result.result === 'success' || result.result === 'partial') {
+          formWrapper.classList.add('hidden');
+          confirmationMessage.classList.remove('hidden');
+          successMessage.classList.remove('hidden');
+          errorMessage.classList.add('hidden');
+        } else {
+          throw new Error(result.message || 'Error desconocido.');
+        }
       } catch (error) {
-        console.error('Error sending message:', error);
-        alert(
-          'Hubo un error al enviar el mensaje. Por favor intenta nuevamente.'
-        );
+        console.error('Error enviando mensaje:', error);
+
+        // Manejo de error: mostrar mensaje de error
+        errorDetails.textContent = `Detalles: ${error.message}`;
+        formWrapper.classList.add('hidden');
+        confirmationMessage.classList.remove('hidden');
+        successMessage.classList.add('hidden');
+        errorMessage.classList.remove('hidden');
+
+        window.generateCaptcha(); // Regenerar CAPTCHA tras el fallo
+      } finally {
+        submitButton.innerHTML = `<span>Enviar Mensaje</span>`;
+        submitButton.disabled = false;
       }
     });
   });
-</script>
+</script> -->
