@@ -1,0 +1,310 @@
+---
+// Apple-style products section with clean, minimalist design
+const products = [
+  {
+    id: 1,
+    name: "Camiseta Fútbol Pro Elite",
+    description: "Diseño profesional con tecnología full-print y materiales premium",
+    features: ["Tecnología Full-Print", "Tela Transpirable", "Corte Atlético"],
+    frontImage: "https://images.pexels.com/photos/8148579/pexels-photo-8148579.jpeg?auto=compress&cs=tinysrgb&w=800",
+    backImage: "https://images.pexels.com/photos/8148580/pexels-photo-8148580.jpeg?auto=compress&cs=tinysrgb&w=800",
+    price: "€45",
+    category: "Fútbol"
+  },
+  {
+    id: 2,
+    name: "Camiseta Basketball Urban",
+    description: "Estilo urbano con máxima comodidad para el juego intenso",
+    features: ["Diseño Urbano", "Secado Rápido", "Libertad de Movimiento"],
+    frontImage: "https://images.pexels.com/photos/8148581/pexels-photo-8148581.jpeg?auto=compress&cs=tinysrgb&w=800",
+    backImage: "https://images.pexels.com/photos/8148582/pexels-photo-8148582.jpeg?auto=compress&cs=tinysrgb&w=800",
+    price: "€48",
+    category: "Basketball"
+  },
+  {
+    id: 3,
+    name: "Camiseta Running Performance",
+    description: "Optimizada para corredores con tecnología de ventilación avanzada",
+    features: ["Ultra Ligera", "Ventilación 360°", "Reflectivos Nocturnos"],
+    frontImage: "https://images.pexels.com/photos/8148583/pexels-photo-8148583.jpeg?auto=compress&cs=tinysrgb&w=800",
+    backImage: "https://images.pexels.com/photos/8148584/pexels-photo-8148584.jpeg?auto=compress&cs=tinysrgb&w=800",
+    price: "€42",
+    category: "Running"
+  },
+  {
+    id: 4,
+    name: "Camiseta Volley Master",
+    description: "Diseño específico para voleibol con flexibilidad total",
+    features: ["Flexibilidad Total", "Anti-Sudor", "Costuras Planas"],
+    frontImage: "https://images.pexels.com/photos/8148585/pexels-photo-8148585.jpeg?auto=compress&cs=tinysrgb&w=800",
+    backImage: "https://images.pexels.com/photos/8148586/pexels-photo-8148586.jpeg?auto=compress&cs=tinysrgb&w=800",
+    price: "€44",
+    category: "Voleibol"
+  },
+  {
+    id: 5,
+    name: "Camiseta Training Intense",
+    description: "Para entrenamientos de alta intensidad con durabilidad extrema",
+    features: ["Resistencia Extrema", "Compresión Ligera", "Antibacterial"],
+    frontImage: "https://images.pexels.com/photos/8148587/pexels-photo-8148587.jpeg?auto=compress&cs=tinysrgb&w=800",
+    backImage: "https://images.pexels.com/photos/8148588/pexels-photo-8148588.jpeg?auto=compress&cs=tinysrgb&w=800",
+    price: "€50",
+    category: "Training"
+  },
+  {
+    id: 6,
+    name: "Camiseta Custom Design",
+    description: "Personalización completa con tu diseño único y exclusivo",
+    features: ["100% Personalizable", "Diseño Exclusivo", "Calidad Premium"],
+    frontImage: "https://images.pexels.com/photos/8148589/pexels-photo-8148589.jpeg?auto=compress&cs=tinysrgb&w=800",
+    backImage: "https://images.pexels.com/photos/8148590/pexels-photo-8148590.jpeg?auto=compress&cs=tinysrgb&w=800",
+    price: "€55",
+    category: "Personalizada"
+  }
+];
+---
+
+<!-- Apple-Style Products Section -->
+<section id="productos-apple" class="py-24 bg-gradient-to-b from-gray-50 to-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="text-center mb-20">
+      <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6 tracking-tight">
+        Nuestra Colección
+      </h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+        Camisetas deportivas diseñadas con precisión. Cada pieza combina tecnología avanzada 
+        con diseño excepcional para ofrecer el máximo rendimiento.
+      </p>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+      {products.map((product) => (
+        <div class="product-card group cursor-pointer">
+          
+          <!-- Card Container -->
+          <div class="bg-white rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-700 ease-out transform hover:-translate-y-2 overflow-hidden border border-gray-100">
+            
+            <!-- Image Container with Flip Effect -->
+            <div class="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+              
+              <!-- Front Image -->
+              <div class="image-front absolute inset-0 transition-transform duration-700 ease-in-out">
+                <img 
+                  src={product.frontImage} 
+                  alt={`${product.name} - Vista frontal`}
+                  class="w-full h-full object-cover object-center"
+                  loading="lazy"
+                />
+              </div>
+              
+              <!-- Back Image -->
+              <div class="image-back absolute inset-0 transition-transform duration-700 ease-in-out transform translate-x-full">
+                <img 
+                  src={product.backImage} 
+                  alt={`${product.name} - Vista trasera`}
+                  class="w-full h-full object-cover object-center"
+                  loading="lazy"
+                />
+              </div>
+              
+              <!-- Category Badge -->
+              <div class="absolute top-4 left-4">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/90 text-gray-700 backdrop-blur-sm">
+                  {product.category}
+                </span>
+              </div>
+              
+              <!-- View Toggle Indicator -->
+              <div class="absolute bottom-4 right-4">
+                <div class="flex space-x-1">
+                  <div class="w-2 h-2 rounded-full bg-white/70 view-indicator-front transition-all duration-300"></div>
+                  <div class="w-2 h-2 rounded-full bg-white/30 view-indicator-back transition-all duration-300"></div>
+                </div>
+              </div>
+              
+              <!-- Hover Overlay -->
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
+            </div>
+            
+            <!-- Content -->
+            <div class="p-8">
+              
+              <!-- Product Name -->
+              <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-primary transition-colors duration-300">
+                {product.name}
+              </h3>
+              
+              <!-- Description -->
+              <p class="text-gray-600 text-sm leading-relaxed mb-6 font-light">
+                {product.description}
+              </p>
+              
+              <!-- Features -->
+              <div class="space-y-2 mb-6">
+                {product.features.map((feature) => (
+                  <div class="flex items-center text-sm text-gray-500">
+                    <svg class="w-4 h-4 text-primary mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="font-light">{feature}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <!-- Price and Action -->
+              <div class="flex items-center justify-between">
+                <div class="text-2xl font-light text-gray-900">
+                  {product.price}
+                </div>
+                <button class="inline-flex items-center px-6 py-2 bg-primary hover:bg-primary-dark text-white text-sm font-medium rounded-full transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                  Personalizar
+                  <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <!-- Call to Action -->
+    <div class="text-center mt-20">
+      <div class="inline-flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
+        <a 
+          href="#contacto" 
+          class="inline-flex items-center px-8 py-4 bg-primary hover:bg-primary-dark text-white font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+        >
+          Solicitar Presupuesto
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </a>
+        <a 
+          href="#contacto" 
+          class="inline-flex items-center px-8 py-4 border-2 border-gray-300 hover:border-primary text-gray-700 hover:text-primary font-medium rounded-full transition-all duration-300"
+        >
+          Ver Más Ejemplos
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Styles for Image Flip Effect -->
+<style>
+  /* Image flip animation on hover */
+  .product-card:hover .image-front {
+    transform: translateX(-100%);
+  }
+  
+  .product-card:hover .image-back {
+    transform: translateX(0);
+  }
+  
+  /* View indicators animation */
+  .product-card:hover .view-indicator-front {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+  
+  .product-card:hover .view-indicator-back {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+  
+  /* Smooth transitions for all elements */
+  .product-card * {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  /* Enhanced shadow on hover */
+  .product-card:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Subtle scale effect for images */
+  .product-card:hover img {
+    transform: scale(1.05);
+    transition: transform 0.7s ease-out;
+  }
+</style>
+
+<!-- JavaScript for Enhanced Interactions -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const productCards = document.querySelectorAll('.product-card');
+    
+    productCards.forEach(card => {
+      let isFlipped = false;
+      
+      // Click to toggle between front and back view
+      card.addEventListener('click', function(e) {
+        // Don't trigger if clicking on the button
+        if (e.target.closest('button')) return;
+        
+        const frontImage = card.querySelector('.image-front');
+        const backImage = card.querySelector('.image-back');
+        const frontIndicator = card.querySelector('.view-indicator-front');
+        const backIndicator = card.querySelector('.view-indicator-back');
+        
+        if (!isFlipped) {
+          // Show back
+          frontImage.style.transform = 'translateX(-100%)';
+          backImage.style.transform = 'translateX(0)';
+          frontIndicator.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+          backIndicator.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+          isFlipped = true;
+        } else {
+          // Show front
+          frontImage.style.transform = 'translateX(0)';
+          backImage.style.transform = 'translateX(100%)';
+          frontIndicator.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+          backIndicator.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+          isFlipped = false;
+        }
+      });
+      
+      // Reset on mouse leave
+      card.addEventListener('mouseleave', function() {
+        if (isFlipped) {
+          const frontImage = card.querySelector('.image-front');
+          const backImage = card.querySelector('.image-back');
+          const frontIndicator = card.querySelector('.view-indicator-front');
+          const backIndicator = card.querySelector('.view-indicator-back');
+          
+          frontImage.style.transform = 'translateX(0)';
+          backImage.style.transform = 'translateX(100%)';
+          frontIndicator.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+          backIndicator.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+          isFlipped = false;
+        }
+      });
+    });
+    
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+    
+    // Observe all product cards for scroll animation
+    productCards.forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(30px)';
+      card.style.transition = `opacity 0.6s ease-out ${index * 0.1}s, transform 0.6s ease-out ${index * 0.1}s`;
+      observer.observe(card);
+    });
+  });
+</script>
