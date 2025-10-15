@@ -1,243 +1,231 @@
----
-// Sección "Trabajamos Para" rediseñada siguiendo Apple HIG
-// Enfoque: Layout horizontal con navegación por pestañas y contenido dinámico
----
-
 <section id="trabajamos-para" class="py-24 bg-white">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    
     <!-- Header Section -->
     <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6 tracking-tight">
+      <h2
+        class="text-4xl md:text-5xl font-light text-gray-900 mb-6 tracking-tight"
+      >
         Trabajamos Para
       </h2>
-      <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
+      <p
+        class="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed"
+      >
         Soluciones personalizadas para cada tipo de organización
       </p>
     </div>
 
-    <!-- Tab Navigation - Apple Style -->
-    <div class="mb-12">
-      <div class="flex justify-center">
-        <div class="inline-flex bg-gray-100 rounded-full p-1 shadow-inner">
-          <button 
-            class="tab-button active px-6 py-3 text-sm font-medium rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            data-tab="deportivos"
+    <!-- Content Cards - Horizontal Layout -->
+    <div class="grid lg:grid-cols-3 gap-8 mb-20">
+      <!-- Deportivos Card -->
+      <div
+        class="bg-gradient-to-br from-primary/5 to-primary/10 rounded-3xl p-8 transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
+      >
+        <div class="flex items-center mb-6">
+          <div
+            class="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center mr-4"
           >
-            Deportivos
-          </button>
-          <button 
-            class="tab-button px-6 py-3 text-sm font-medium rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            data-tab="eventos"
-          >
-            Eventos
-          </button>
-          <button 
-            class="tab-button px-6 py-3 text-sm font-medium rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
-            data-tab="organizaciones"
-          >
-            Organizaciones
-          </button>
+            <svg
+              class="w-6 h-6 text-primary"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-semibold text-gray-900">Deportivos</h3>
         </div>
-      </div>
-    </div>
 
-    <!-- Content Panels -->
-    <div class="relative min-h-[500px]">
-      
-      <!-- Deportivos Panel -->
-      <div id="deportivos-panel" class="tab-panel active">
-        <div class="grid lg:grid-cols-2 gap-16 items-center">
-          
-          <!-- Content Side -->
-          <div class="space-y-8">
-            <div class="space-y-6">
-              <div class="client-type-item opacity-0 transform translate-y-4">
-                <div class="flex items-start space-x-4">
-                  <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                    <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
-                  </div>
-                  <div class="flex-1">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Clubs y Equipos Deportivos</h3>
-                    <p class="text-gray-600 leading-relaxed">Camisetas profesionales para fútbol, básquet, voleibol y más deportes. Diseños únicos que reflejan la identidad de tu equipo.</p>
-                    <div class="mt-3 flex flex-wrap gap-2">
-                      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">Fútbol</span>
-                      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">Básquet</span>
-                      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">Voleibol</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="client-type-item opacity-0 transform translate-y-4">
-                <div class="flex items-start space-x-4">
-                  <div class="flex-shrink-0 w-12 h-12 bg-yellow/10 rounded-xl flex items-center justify-center">
-                    <svg class="w-6 h-6 text-yellow" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
-                  </div>
-                  <div class="flex-1">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Pruebas Deportivas</h3>
-                    <p class="text-gray-600 leading-relaxed">Camisetas conmemorativas para maratones, carreras, torneos y competiciones deportivas de todo tipo.</p>
-                    <div class="mt-3 flex flex-wrap gap-2">
-                      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow/10 text-yellow">Maratones</span>
-                      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow/10 text-yellow">Torneos</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <div class="space-y-4 mb-6">
+          <div>
+            <h4 class="text-lg font-medium text-gray-900 mb-2">
+              Clubs y Equipos Deportivos
+            </h4>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Camisetas profesionales para fútbol, básquet, voleibol y más
+              deportes.
+            </p>
+            <div class="mt-2 flex flex-wrap gap-1">
+              <span
+                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary"
+                >Fútbol</span
+              >
+              <span
+                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary"
+                >Básquet</span
+              >
+              <span
+                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary"
+                >Voleibol</span
+              >
             </div>
           </div>
 
-          <!-- Visual Side -->
-          <div class="relative">
-            <div class="aspect-square bg-gradient-to-br from-primary/5 to-primary/10 rounded-3xl flex items-center justify-center overflow-hidden">
-              <div class="relative w-64 h-64">
-                <!-- Animated Sports Icons -->
-                <div class="absolute inset-0 flex items-center justify-center">
-                  <div class="w-32 h-32 bg-primary/20 rounded-full flex items-center justify-center animate-pulse">
-                    <svg class="w-16 h-16 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
-                  </div>
-                </div>
-                <!-- Floating Elements -->
-                <div class="absolute top-4 right-4 w-8 h-8 bg-yellow/30 rounded-full animate-bounce"></div>
-                <div class="absolute bottom-4 left-4 w-6 h-6 bg-primary/30 rounded-full animate-bounce" style="animation-delay: 0.5s;"></div>
-              </div>
+          <div>
+            <h4 class="text-lg font-medium text-gray-900 mb-2">
+              Pruebas Deportivas
+            </h4>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Camisetas conmemorativas para maratones, carreras, torneos y
+              competiciones.
+            </p>
+            <div class="mt-2 flex flex-wrap gap-1">
+              <span
+                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow/20 text-yellow"
+                >Maratones</span
+              >
+              <span
+                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow/20 text-yellow"
+                >Torneos</span
+              >
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Eventos Panel -->
-      <div id="eventos-panel" class="tab-panel">
-        <div class="grid lg:grid-cols-2 gap-16 items-center">
-          
-          <!-- Content Side -->
-          <div class="space-y-8">
-            <div class="space-y-6">
-              <div class="client-type-item opacity-0 transform translate-y-4">
-                <div class="flex items-start space-x-4">
-                  <div class="flex-shrink-0 w-12 h-12 bg-yellow/10 rounded-xl flex items-center justify-center">
-                    <svg class="w-6 h-6 text-yellow" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2l2 7h7l-5.5 4.5 2 7L12 16l-5.5 4.5 2-7L3 9h7l2-7z"/>
-                    </svg>
-                  </div>
-                  <div class="flex-1">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Eventos Especiales</h3>
-                    <p class="text-gray-600 leading-relaxed">Camisetas únicas para eventos corporativos, festivales, conciertos y celebraciones especiales.</p>
-                    <div class="mt-3 flex flex-wrap gap-2">
-                      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow/10 text-yellow">Festivales</span>
-                      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow/10 text-yellow">Conciertos</span>
-                      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow/10 text-yellow">Corporativos</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="client-type-item opacity-0 transform translate-y-4">
-                <div class="flex items-start space-x-4">
-                  <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                    <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/>
-                    </svg>
-                  </div>
-                  <div class="flex-1">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Empresas y Corporativos</h3>
-                    <p class="text-gray-600 leading-relaxed">Uniformes corporativos y camisetas promocionales que refuerzan la imagen de marca de tu empresa.</p>
-                    <div class="mt-3 flex flex-wrap gap-2">
-                      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">Uniformes</span>
-                      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">Promocionales</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Visual Side -->
-          <div class="relative">
-            <div class="aspect-square bg-gradient-to-br from-yellow/5 to-yellow/10 rounded-3xl flex items-center justify-center overflow-hidden">
-              <div class="relative w-64 h-64">
-                <div class="absolute inset-0 flex items-center justify-center">
-                  <div class="w-32 h-32 bg-yellow/20 rounded-full flex items-center justify-center animate-pulse">
-                    <svg class="w-16 h-16 text-yellow" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2l2 7h7l-5.5 4.5 2 7L12 16l-5.5 4.5 2-7L3 9h7l2-7z"/>
-                    </svg>
-                  </div>
-                </div>
-                <div class="absolute top-4 right-4 w-8 h-8 bg-primary/30 rounded-full animate-bounce"></div>
-                <div class="absolute bottom-4 left-4 w-6 h-6 bg-yellow/30 rounded-full animate-bounce" style="animation-delay: 0.5s;"></div>
-              </div>
-            </div>
-          </div>
+        <div class="text-center pt-4 border-t border-primary/20">
+          <p class="text-primary font-medium text-sm">
+            +500 equipos satisfechos
+          </p>
         </div>
       </div>
 
-      <!-- Organizaciones Panel -->
-      <div id="organizaciones-panel" class="tab-panel">
-        <div class="grid lg:grid-cols-2 gap-16 items-center">
-          
-          <!-- Content Side -->
-          <div class="space-y-8">
-            <div class="space-y-6">
-              <div class="client-type-item opacity-0 transform translate-y-4">
-                <div class="flex items-start space-x-4">
-                  <div class="flex-shrink-0 w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center">
-                    <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.94-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-                    </svg>
-                  </div>
-                  <div class="flex-1">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Cofradías y Hermandades</h3>
-                    <p class="text-gray-600 leading-relaxed">Camisetas tradicionales y ceremoniales para cofradías religiosas, respetando la tradición con elegancia.</p>
-                    <div class="mt-3 flex flex-wrap gap-2">
-                      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-500/10 text-green-500">Tradicionales</span>
-                      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-500/10 text-green-500">Ceremoniales</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      <!-- Eventos Card -->
+      <div
+        class="bg-gradient-to-br from-yellow/5 to-yellow/10 rounded-3xl p-8 transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
+      >
+        <div class="flex items-center mb-6">
+          <div
+            class="w-12 h-12 bg-yellow/20 rounded-xl flex items-center justify-center mr-4"
+          >
+            <svg
+              class="w-6 h-6 text-yellow"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path d="M12 2l2 7h7l-5.5 4.5 2 7L12 16l-5.5 4.5 2-7L3 9h7l2-7z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-semibold text-gray-900">Eventos</h3>
+        </div>
 
-              <div class="client-type-item opacity-0 transform translate-y-4">
-                <div class="flex items-start space-x-4">
-                  <div class="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                    <svg class="w-6 h-6 text-primary" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 18v-4h3v4h2v-7.5c0-.83.67-1.5 1.5-1.5S12 9.67 12 10.5V11h2.5c.83 0 1.5.67 1.5 1.5V18h2v-6.5c0-1.38-1.12-2.5-2.5-2.5H13V9.5c0-1.38-1.12-2.5-2.5-2.5S8 8.12 8 9.5V11H4c-1.1 0-2 .9-2 2v5h2z"/>
-                    </svg>
-                  </div>
-                  <div class="flex-1">
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Asociaciones y Grupos</h3>
-                    <p class="text-gray-600 leading-relaxed">Camisetas para asociaciones culturales, grupos vecinales y organizaciones comunitarias.</p>
-                    <div class="mt-3 flex flex-wrap gap-2">
-                      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">Culturales</span>
-                      <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">Vecinales</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        <div class="space-y-4 mb-6">
+          <div>
+            <h4 class="text-lg font-medium text-gray-900 mb-2">
+              Eventos Especiales
+            </h4>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Camisetas únicas para eventos corporativos, festivales, conciertos
+              y celebraciones.
+            </p>
+            <div class="mt-2 flex flex-wrap gap-1">
+              <span
+                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow/20 text-yellow"
+                >Festivales</span
+              >
+              <span
+                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow/20 text-yellow"
+                >Conciertos</span
+              >
+              <span
+                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow/20 text-yellow"
+                >Corporativos</span
+              >
             </div>
           </div>
 
-          <!-- Visual Side -->
-          <div class="relative">
-            <div class="aspect-square bg-gradient-to-br from-green-500/5 to-green-500/10 rounded-3xl flex items-center justify-center overflow-hidden">
-              <div class="relative w-64 h-64">
-                <div class="absolute inset-0 flex items-center justify-center">
-                  <div class="w-32 h-32 bg-green-500/20 rounded-full flex items-center justify-center animate-pulse">
-                    <svg class="w-16 h-16 text-green-500" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 18v-4h3v4h2v-7.5c0-.83.67-1.5 1.5-1.5S12 9.67 12 10.5V11h2.5c.83 0 1.5.67 1.5 1.5V18h2v-6.5c0-1.38-1.12-2.5-2.5-2.5H13V9.5c0-1.38-1.12-2.5-2.5-2.5S8 8.12 8 9.5V11H4c-1.1 0-2 .9-2 2v5h2z"/>
-                    </svg>
-                  </div>
-                </div>
-                <div class="absolute top-4 right-4 w-8 h-8 bg-primary/30 rounded-full animate-bounce"></div>
-                <div class="absolute bottom-4 left-4 w-6 h-6 bg-green-500/30 rounded-full animate-bounce" style="animation-delay: 0.5s;"></div>
-              </div>
+          <div>
+            <h4 class="text-lg font-medium text-gray-900 mb-2">
+              Empresas y Corporativos
+            </h4>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Uniformes corporativos y camisetas promocionales que refuerzan tu
+              marca.
+            </p>
+            <div class="mt-2 flex flex-wrap gap-1">
+              <span
+                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary"
+                >Uniformes</span
+              >
+              <span
+                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary"
+                >Promocionales</span
+              >
             </div>
           </div>
+        </div>
+
+        <div class="text-center pt-4 border-t border-yellow/20">
+          <p class="text-yellow font-medium text-sm">+300 eventos realizados</p>
+        </div>
+      </div>
+
+      <!-- Organizaciones Card -->
+      <div
+        class="bg-gradient-to-br from-green-500/5 to-green-500/10 rounded-3xl p-8 transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
+      >
+        <div class="flex items-center mb-6">
+          <div
+            class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center mr-4"
+          >
+            <svg
+              class="w-6 h-6 text-green-500"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 18v-4h3v4h2v-7.5c0-.83.67-1.5 1.5-1.5S12 9.67 12 10.5V11h2.5c.83 0 1.5.67 1.5 1.5V18h2v-6.5c0-1.38-1.12-2.5-2.5-2.5H13V9.5c0-1.38-1.12-2.5-2.5-2.5S8 8.12 8 9.5V11H4c-1.1 0-2 .9-2 2v5h2z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="text-2xl font-semibold text-gray-900">Organizaciones</h3>
+        </div>
+
+        <div class="space-y-4 mb-6">
+          <div>
+            <h4 class="text-lg font-medium text-gray-900 mb-2">
+              Cofradías y Hermandades
+            </h4>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Camisetas tradicionales y ceremoniales respetando la tradición con
+              elegancia.
+            </p>
+            <div class="mt-2 flex flex-wrap gap-1">
+              <span
+                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-500"
+                >Tradicionales</span
+              >
+              <span
+                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-500"
+                >Ceremoniales</span
+              >
+            </div>
+          </div>
+
+          <div>
+            <h4 class="text-lg font-medium text-gray-900 mb-2">
+              Asociaciones y Grupos
+            </h4>
+            <p class="text-gray-600 text-sm leading-relaxed">
+              Camisetas para asociaciones culturales, grupos vecinales y
+              organizaciones.
+            </p>
+            <div class="mt-2 flex flex-wrap gap-1">
+              <span
+                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary"
+                >Culturales</span
+              >
+              <span
+                class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary"
+                >Vecinales</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center pt-4 border-t border-green-500/20">
+          <p class="text-green-500 font-medium text-sm">+150 organizaciones</p>
         </div>
       </div>
     </div>
@@ -247,7 +235,9 @@
       <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
         <div class="text-center">
           <div class="text-3xl font-light text-gray-900 mb-2">500+</div>
-          <div class="text-sm text-gray-600 font-medium">Clientes Satisfechos</div>
+          <div class="text-sm text-gray-600 font-medium">
+            Clientes Satisfechos
+          </div>
         </div>
         <div class="text-center">
           <div class="text-3xl font-light text-gray-900 mb-2">15K+</div>
@@ -255,11 +245,15 @@
         </div>
         <div class="text-center">
           <div class="text-3xl font-light text-gray-900 mb-2">10+</div>
-          <div class="text-sm text-gray-600 font-medium">Años de Experiencia</div>
+          <div class="text-sm text-gray-600 font-medium">
+            Años de Experiencia
+          </div>
         </div>
         <div class="text-center">
           <div class="text-3xl font-light text-gray-900 mb-2">24h</div>
-          <div class="text-sm text-gray-600 font-medium">Tiempo de Respuesta</div>
+          <div class="text-sm text-gray-600 font-medium">
+            Tiempo de Respuesta
+          </div>
         </div>
       </div>
     </div>
@@ -267,158 +261,27 @@
     <!-- CTA Section -->
     <div class="text-center mt-16">
       <p class="text-gray-600 mb-6 text-lg font-light">
-        ¿Tu organización no está en la lista? Trabajamos con todo tipo de clientes.
+        ¿Tu organización no está en la lista? Trabajamos con todo tipo de
+        clientes.
       </p>
       <a
         href="#contacto"
         class="inline-flex items-center bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
       >
         Consulta tu Proyecto
-        <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        <svg
+          class="w-5 h-5 ml-2"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
         </svg>
       </a>
     </div>
   </div>
 </section>
-
-<!-- Styles -->
-<style>
-  /* Tab Navigation Styles */
-  .tab-button {
-    color: #6b7280;
-    background: transparent;
-  }
-  
-  .tab-button.active {
-    color: #ffffff;
-    background: #3899B7;
-    box-shadow: 0 4px 12px rgba(56, 153, 183, 0.3);
-  }
-  
-  .tab-button:hover:not(.active) {
-    color: #374151;
-    background: rgba(255, 255, 255, 0.8);
-  }
-
-  /* Panel Transitions */
-  .tab-panel {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    pointer-events: none;
-  }
-  
-  .tab-panel.active {
-    opacity: 1;
-    transform: translateY(0);
-    position: relative;
-    pointer-events: auto;
-  }
-
-  /* Content Animation */
-  .client-type-item {
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .tab-panel.active .client-type-item {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-  }
-  
-  .tab-panel.active .client-type-item:nth-child(1) {
-    transition-delay: 0.1s;
-  }
-  
-  .tab-panel.active .client-type-item:nth-child(2) {
-    transition-delay: 0.2s;
-  }
-
-  /* Focus States for Accessibility */
-  .tab-button:focus {
-    outline: none;
-    ring: 2px;
-    ring-color: #3899B7;
-    ring-offset: 2px;
-  }
-
-  /* Smooth animations */
-  @media (prefers-reduced-motion: reduce) {
-    .tab-panel,
-    .client-type-item,
-    .tab-button {
-      transition: none;
-    }
-  }
-</style>
-
-<!-- JavaScript for Tab Functionality -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const tabButtons = document.querySelectorAll('.tab-button');
-    const tabPanels = document.querySelectorAll('.tab-panel');
-    
-    // Initialize first tab
-    showTab('deportivos');
-    
-    // Add click listeners to tab buttons
-    tabButtons.forEach(button => {
-      button.addEventListener('click', function() {
-        const tabId = this.dataset.tab;
-        showTab(tabId);
-        
-        // Update active button
-        tabButtons.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-      });
-      
-      // Keyboard navigation
-      button.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          this.click();
-        }
-      });
-    });
-    
-    function showTab(tabId) {
-      // Hide all panels
-      tabPanels.forEach(panel => {
-        panel.classList.remove('active');
-      });
-      
-      // Show selected panel with delay for smooth transition
-      setTimeout(() => {
-        const targetPanel = document.getElementById(`${tabId}-panel`);
-        if (targetPanel) {
-          targetPanel.classList.add('active');
-        }
-      }, 100);
-    }
-    
-    // Intersection Observer for scroll animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-    
-    // Observe elements for scroll animation
-    const animatedElements = document.querySelectorAll('.client-type-item');
-    animatedElements.forEach(el => {
-      observer.observe(el);
-    });
-  });
-</script>
