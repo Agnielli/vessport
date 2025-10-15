@@ -3,33 +3,24 @@
 const testimonials = [
   {
     id: 1,
-    name: "Carlos Martínez",
-    organization: "Club Atletismo Sureste",
+    name: "David Montoya",
+    organization: "Mojacar 4x4",
     role: "Representante",
-    testimonial: "Las camisetas que nos hizo VES Sport superaron todas nuestras expectativas. La calidad del full-print es excepcional y el servicio al cliente fue impecable. Nuestros jugadores están encantados con el resultado.",
+    testimonial: "Desde el equipo Mojacar 4x4 recomendamos esta empresa, hemos recibido un trato muy bueno por parte de ves publicidad, recomendable 100% mucha calidad y profesionalidad. No lo dudes, presentarle vuestras ideas y ellos harán el resto👍",
     rating: 5,
     image: null
   },
   {
     id: 2,
-    name: "María González",
-    organization: "Maratón Costa del Sol",
-    role: "Organizadora",
-    testimonial: "Trabajamos con VES Sport para nuestro evento anual y el resultado fue fantástico. Entregaron 500 camisetas en tiempo récord y la calidad fue consistente en todas. Definitivamente repetiremos.",
+    name: "Marina",
+    organization: "",
+    role: "Emprendedora",
+    testimonial: "Cuando decides emprender, una de las cosas más importante es crear una imagen que te defina. En mi caso, captaron mis ideas rapidísimo y me encantó. Estoy súper contenta e ilusionada con mi nueva imagen y con el material creado. Muy profesionales y sobre todo muy buena gente :)",
     rating: 5,
     image: null
   },
   {
     id: 3,
-    name: "Antonio Ruiz",
-    organization: "Hermandad de Garrucha",
-    role: "Hermano Mayor",
-    testimonial: "Necesitábamos camisetas especiales para nuestra peregrinación y VES Sport entendió perfectamente nuestras necesidades. El diseño respetó nuestras tradiciones y la calidad fue excelente.",
-    rating: 5,
-    image: null
-  },
-  {
-    id: 4,
     name: "Eliana Berdoy",
     organization: "Asociación Construyendo Comunidad",
     role: "Secretaria",
@@ -38,20 +29,29 @@ const testimonials = [
     image: null
   },
   {
+    id: 4,
+    name: "Aranzazu Muñoz",
+    organization: "",
+    role: "Representante",
+    testimonial: "La cooperación con el personal, cercana y profesional. El material, muy bueno y el resultado, excelente. Muchas gracias.",
+    rating: 5,
+    image: null
+  },
+  {
     id: 5,
-    name: "José Luis Pérez",
-    organization: "Empresa Construcciones del Sur",
-    role: "Gerente",
-    testimonial: "Buscábamos uniformes corporativos de calidad para nuestro equipo. VES Sport nos proporcionó camisetas duraderas y cómodas que han resistido perfectamente el uso diario en obra.",
+    name: "Saúl Hernández Andrés",
+    organization: "",
+    role: "Representante",
+    testimonial: "Un servicio y calidad excelentes. El trato es cercano y a la par, profesional.",
     rating: 5,
     image: null
   },
   {
     id: 6,
-    name: "Carmen Jiménez",
-    organization: "Equipo Futbol Sala Playas de Garrucha",
-    role: "Capitana",
-    testimonial: "Como equipo femenino, queríamos camisetas que fueran tanto funcionales como estéticamente atractivas. VES Sport logró el equilibrio perfecto y nos sentimos geniales jugando con ellas.",
+    name: "José Domingo",
+    organization: "",
+    role: "Cliente ",
+    testimonial: "Un equipo magnífico, competente y puntual con su trabajo.",
     rating: 5,
     image: null
   }
@@ -61,12 +61,11 @@ const testimonials = [
 <section id="testimonios" class="py-20 bg-gray-50">
   <div class="container max-w-7xl mx-auto">
     <div class="text-center mb-16">
-      <h2
-        class="text-3xl md:text-4xl font-display font-bold text-gray-900 mb-4"
-      >
+            <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6 tracking-tight">
+
         Lo que Opinan Nuestros Clientes
       </h2>
-      <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
         La satisfacción de nuestros clientes es nuestra mejor carta de presentación
       </p>
     </div>
@@ -93,7 +92,7 @@ const testimonials = [
 
           <!-- Client info -->
           <div class="flex items-center">
-            <div class="w-12 h-12 bg-gradient-to-br from-primary to-primary-dark rounded-full flex items-center justify-center mr-4">
+            <div class="w-12 h-12 bg-gradient-to-br from-primary-dark via-primary to-gray-200 rounded-full flex items-center justify-center mr-4">
               <span class="text-white font-semibold text-lg">
                 {testimonial.name.charAt(0)}
               </span>
@@ -119,12 +118,6 @@ const testimonials = [
           class="bg-primary hover:bg-primary-dark text-white px-8 py-3 rounded-lg font-semibold transition-colors"
         >
           Solicita tu Presupuesto
-        </a>
-        <a
-          href="#productos"
-          class="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors"
-        >
-          Ver Nuestros Productos
         </a>
       </div>
     </div>
