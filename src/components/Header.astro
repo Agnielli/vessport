@@ -3,13 +3,13 @@
 ---
 
 <header class="sticky top-0 z-50 bg-white shadow-md py-2">
-  <div class="container max-w-7xl mx-auto">
-    <div class="flex items-center justify-between h-16">
+  <div class="container max-w-7xl mx-auto px-4 xl:px-0">
+    <div class="flex items-center justify-between h-16 mx-auto">
       <!-- Logo -->
       <img
         src="/images/horizontal.png"
         alt="Ves Sport Logo"
-        class="h-14 w-auto"
+        class="h-14 w-auto ml-2 md:ml-0"
       />
 
       <!-- Navigation -->
@@ -109,5 +109,13 @@
 
   mobileMenuToggle?.addEventListener('click', () => {
     mobileMenu?.classList.toggle('hidden');
+  });
+
+  // Close mobile menu when clicking on links
+  const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+  mobileMenuLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.add('hidden');
+    });
   });
 </script>
