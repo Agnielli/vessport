@@ -61,6 +61,7 @@ const categories = [
   },
   {
     title: "Running",
+    disabled: true,
     products: [
       {
         id: 7,
@@ -90,6 +91,7 @@ const categories = [
   },
   {
     title: "Voleibol",
+    disabled: true,
     products: [
       {
         id: 10,
@@ -119,6 +121,7 @@ const categories = [
   },
   {
     title: "Eventos Especiales",
+    disabled: true,
     products: [
       {
         id: 13,
@@ -148,6 +151,7 @@ const categories = [
   },
   {
     title: "Empresas",
+    disabled: true,
     products: [
       {
         id: 16,
@@ -177,6 +181,7 @@ const categories = [
   },
   {
     title: "Asociaciones y Grupos",
+    disabled: true,
     products: [
       {
         id: 19,
@@ -212,195 +217,218 @@ const categories = [
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <!-- Section Header -->
-    <div class="text-center mb-20">
+    <div class="text-center mb-16">
       <h2 class="text-4xl md:text-5xl font-light text-gray-900 mb-6 tracking-tight">
         Algunos de <span class="text-primary">nuestros trabajos</span>
       </h2>
       <p class="text-xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed mt-6">
         Especialistas en custom wear Full-print. Cada pieza combina tecnología avanzada
         con diseño excepcional para ofrecer el máximo rendimiento.
-        </p>
-      </div>
+      </p>
+    </div>
 
-    <!-- Categories Loop -->
-    {categories.map((category) => (
-      <div class="mb-24 last:mb-0">
-        <h3 class="text-3xl font-light text-gray-800 mb-10 border-l-4 border-primary pl-4">
+    <!-- Categories Tabs -->
+    <div class="flex flex-wrap justify-center gap-3 mb-16">
+      {categories.map((category, index) => (
+        <button 
+          class={`category-tab px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${category.disabled ? 'opacity-60 bg-gray-100 text-gray-500 border border-gray-200 cursor-not-allowed' : (index === 0 ? 'bg-primary text-white shadow-md' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200')}`}
+          data-target={`category-${index}`}
+          disabled={category.disabled}
+          title={category.disabled ? 'Próximamente' : ''}
+        >
           {category.title}
-        </h3>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-          {category.products.map((product) => (
-            <div class="product-card group cursor-pointer">
+          {category.disabled && <span class="ml-2 inline-block px-2 py-0.5 bg-gray-200 text-gray-600 rounded text-[10px] uppercase tracking-wider font-bold align-middle">Próximamente</span>}
+        </button>
+      ))}
+    </div>
+
+    <!-- Categories Content -->
+    <div class="relative min-h-[500px]">
+      {categories.map((category, index) => (
+        <div 
+          id={`category-${index}`} 
+          class={`category-content transition-opacity duration-500 ease-in-out ${index === 0 ? 'opacity-100 relative z-10' : 'opacity-0 absolute top-0 left-0 w-full pointer-events-none'}`}
+        >
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+            {category.products.map((product) => (
               
               <!-- Card Container -->
-              <div class="bg-white rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-700 ease-out transform hover:-translate-y-2 overflow-hidden border border-gray-100 h-full flex flex-col">
+              <div class="product-card bg-white rounded-3xl shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 h-full flex flex-col group [perspective:1000px] cursor-pointer">
                 
-                <!-- Image Container with Flip Effect -->
-                <div class="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+                <!-- 3D Flipper Container -->
+                <div class="relative w-full aspect-square transition-transform duration-700 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] group-[.flipped]:[transform:rotateY(180deg)]">
                   
-                  <!-- Front Image -->
-                  <div class="image-front absolute inset-0 transition-transform duration-700 ease-in-out">
+                  <!-- Front Face -->
+                  <div class="absolute inset-0 w-full h-full [backface-visibility:hidden] bg-gradient-to-br from-gray-50 to-gray-100 rounded-t-3xl overflow-hidden">
                     <img 
                       src={product.frontImage} 
                       alt={`${product.name} - Vista frontal`}
                       class="w-full h-full object-cover object-center"
                       loading="lazy"
                     />
+                    
+                    <!-- Gradient for Indicators Contrast -->
+                    <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent"></div>
+                    
+                    <!-- Rotate Icon Indicator -->
+                    <div class="absolute top-4 right-4 bg-black/40 backdrop-blur-sm rounded-full p-2 text-white/90">
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+                    </div>
+
+                    <!-- View Toggle Indicator (Dots) -->
+                    <div class="absolute bottom-4 right-4 flex space-x-1.5">
+                      <div class="w-2 h-2 rounded-full bg-white/90"></div>
+                      <div class="w-2 h-2 rounded-full bg-white/40"></div>
+                    </div>
                   </div>
                   
-                  <!-- Back Image -->
-                  <div class="image-back absolute inset-0 transition-transform duration-700 ease-in-out transform translate-x-full">
+                  <!-- Back Face -->
+                  <div class="absolute inset-0 w-full h-full [transform:rotateY(180deg)] [backface-visibility:hidden] bg-gradient-to-br from-gray-50 to-gray-100 rounded-t-3xl overflow-hidden">
                     <img 
                       src={product.backImage} 
                       alt={`${product.name} - Vista trasera`}
                       class="w-full h-full object-cover object-center"
                       loading="lazy"
                     />
-                  </div>
-                  
-                  <!-- View Toggle Indicator -->
-                  <div class="absolute bottom-4 right-4">
-                    <div class="flex space-x-1">
-                      <div class="w-2 h-2 rounded-full bg-white/70 view-indicator-front transition-all duration-300"></div>
-                      <div class="w-2 h-2 rounded-full bg-white/30 view-indicator-back transition-all duration-300"></div>
+                    
+                    <!-- Gradient for Indicators Contrast -->
+                    <div class="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/60 to-transparent"></div>
+
+                    <!-- View Toggle Indicator (Dots) -->
+                    <div class="absolute bottom-4 right-4 flex space-x-1.5">
+                      <div class="w-2 h-2 rounded-full bg-white/40"></div>
+                      <div class="w-2 h-2 rounded-full bg-white/90"></div>
                     </div>
                   </div>
-                  
-                  <!-- Hover Overlay -->
-                  <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
                 </div>
                 
                 <!-- Content -->
-                <div class="p-8 flex flex-col flex-grow">
+                <div class="p-8 flex flex-col flex-grow relative z-10 bg-white rounded-b-3xl">
                   
                   <!-- Product Name -->
-                  <h4 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-primary transition-colors duration-300">
+                  <h4 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-primary transition-colors duration-300">
                     {product.name}
                   </h4>
                   
                   <!-- Description -->
-                  <p class="text-gray-600 text-sm leading-relaxed mb-6 font-light flex-grow">
+                  <p class="text-gray-600 text-sm leading-relaxed mb-5 font-light flex-grow">
                     {product.description}
                   </p>
                   
-                  <!-- Features -->
-                  <div class="space-y-2">
+                  <!-- Features (Simplified Tags) -->
+                  <div class="flex flex-wrap gap-2 mb-8">
                     {product.features.map((feature) => (
-                      <div class="flex items-center text-sm text-gray-500">
-                        <svg class="w-4 h-4 text-primary mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                        </svg>
-                        <span class="font-light">{feature}</span>
-                      </div>
+                      <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-600">
+                        {feature}
+                      </span>
                     ))}
                   </div>
+
+                  <!-- Quick Action Button -->
+                  <a 
+                    href={`https://wa.me/34685168032?text=Hola,%20me%20gustar%C3%ADa%20pedir%20presupuesto%20para%20${encodeURIComponent(product.name)}`} 
+                    target="_blank" 
+                    class="mt-auto w-full inline-flex items-center justify-center py-3 text-sm font-semibold text-primary bg-primary/10 hover:bg-primary/20 hover:text-primary-dark rounded-xl transition-all duration-300"
+                  >
+                    Me interesa
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                  </a>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
     
-    <!-- Call to Action -->
+    <!-- Global Call to Action -->
     <div class="text-center mt-20">
       <div class="inline-flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-6">
         <a 
           href="#contacto" 
           class="inline-flex items-center px-8 py-4 bg-primary hover:bg-primary-dark text-white font-medium rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
         >
-          Solicitar Presupuesto
+          Ir al formulario completo
           <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
           </svg>
         </a>
-        
       </div>
     </div>
   </div>
 </section>
 
-<!-- Styles for Image Flip Effect -->
-<style>
-  /* Image flip animation on hover */
-  .product-card:hover .image-front {
-    transform: translateX(-100%);
-  }
-  
-  .product-card:hover .image-back {
-    transform: translateX(0);
-  }
-  
-  /* View indicators animation */
-  .product-card:hover .view-indicator-front {
-    background-color: rgba(255, 255, 255, 0.3);
-  }
-  
-  .product-card:hover .view-indicator-back {
-    background-color: rgba(255, 255, 255, 0.9);
-  }
-  
-  /* Subtle scale effect for images */
-  .product-card:hover img {
-    transform: scale(1.05);
-    transition: transform 0.7s ease-out;
-  }
-</style>
-
 <!-- JavaScript for Enhanced Interactions -->
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    
+    // --- Tabs Logic ---
+    const tabs = document.querySelectorAll('.category-tab');
+    const contents = document.querySelectorAll('.category-content');
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Remove active state from all tabs
+        tabs.forEach(t => {
+          t.classList.remove('bg-primary', 'text-white', 'shadow-md');
+          t.classList.add('bg-white', 'text-gray-600', 'hover:bg-gray-100', 'border', 'border-gray-200');
+        });
+        
+        // Add active state to clicked tab
+        tab.classList.remove('bg-white', 'text-gray-600', 'hover:bg-gray-100', 'border', 'border-gray-200');
+        tab.classList.add('bg-primary', 'text-white', 'shadow-md');
+        
+        // Hide all contents
+        contents.forEach(content => {
+          content.classList.remove('opacity-100', 'relative', 'z-10');
+          content.classList.add('opacity-0', 'absolute', 'pointer-events-none');
+        });
+        
+        // Show target content
+        const targetId = tab.getAttribute('data-target');
+        const targetContent = document.getElementById(targetId);
+        if(targetContent) {
+          targetContent.classList.remove('opacity-0', 'absolute', 'pointer-events-none');
+          targetContent.classList.add('opacity-100', 'relative', 'z-10');
+          
+          // Re-trigger intersection observer for newly visible cards
+          const newCards = targetContent.querySelectorAll('.product-card');
+          newCards.forEach((card, index) => {
+            card.style.transition = 'none';
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            
+            // Force reflow
+            void card.offsetWidth;
+            
+            card.style.transition = `opacity 0.6s ease-out ${index * 0.1}s, transform 0.6s ease-out ${index * 0.1}s`;
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          });
+        }
+      });
+    });
+
+    // --- Cards Flip Logic (Mobile) ---
     const productCards = document.querySelectorAll('.product-card');
     
     productCards.forEach(card => {
-      let isFlipped = false;
-      
       // Click to toggle between front and back view
       card.addEventListener('click', function(e) {
-        // Don't trigger if clicking on the button
-        if (e.target.closest('button')) return;
-        
-        const frontImage = card.querySelector('.image-front');
-        const backImage = card.querySelector('.image-back');
-        const frontIndicator = card.querySelector('.view-indicator-front');
-        const backIndicator = card.querySelector('.view-indicator-back');
-        
-        if (!isFlipped) {
-          // Show back
-          frontImage.style.transform = 'translateX(-100%)';
-          backImage.style.transform = 'translateX(0)';
-          frontIndicator.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
-          backIndicator.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
-          isFlipped = true;
-        } else {
-          // Show front
-          frontImage.style.transform = 'translateX(0)';
-          backImage.style.transform = 'translateX(100%)';
-          frontIndicator.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
-          backIndicator.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
-          isFlipped = false;
-        }
+        // Don't trigger if clicking on the button or link
+        if (e.target.closest('a') || e.target.closest('button')) return;
+        card.classList.toggle('flipped');
       });
       
       // Reset on mouse leave
       card.addEventListener('mouseleave', function() {
-        if (isFlipped) {
-          const frontImage = card.querySelector('.image-front');
-          const backImage = card.querySelector('.image-back');
-          const frontIndicator = card.querySelector('.view-indicator-front');
-          const backIndicator = card.querySelector('.view-indicator-back');
-          
-          frontImage.style.transform = 'translateX(0)';
-          backImage.style.transform = 'translateX(100%)';
-          frontIndicator.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
-          backIndicator.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
-          isFlipped = false;
-        }
+        card.classList.remove('flipped');
       });
     });
     
-    // Intersection Observer for scroll animations
+    // --- Intersection Observer for scroll animations ---
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -415,8 +443,9 @@ const categories = [
       });
     }, observerOptions);
     
-    // Observe all product cards for scroll animation
-    productCards.forEach((card, index) => {
+    // Observe initially visible product cards
+    const initialCards = document.getElementById('category-0').querySelectorAll('.product-card');
+    initialCards.forEach((card, index) => {
       card.style.opacity = '0';
       card.style.transform = 'translateY(30px)';
       card.style.transition = `opacity 0.6s ease-out ${index * 0.1}s, transform 0.6s ease-out ${index * 0.1}s`;
