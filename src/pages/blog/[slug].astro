@@ -17,10 +17,30 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const post = entry.data;
 
+const formatDate = (dateString) => {
+  if (!dateString) return '';
+  const [year, month, day] = dateString.split('-').map(Number);
+  const months = [
+    'enero',
+    'febrero',
+    'marzo',
+    'abril',
+    'mayo',
+    'junio',
+    'julio',
+    'agosto',
+    'septiembre',
+    'octubre',
+    'noviembre',
+    'diciembre',
+  ];
+  return `${day} de ${months[month - 1]} de ${year}`;
+};
+
 // Obtener otros artículos para la sección "También te puede interesar"
 const allPosts = await getCollection('blog');
 const relatedPosts = allPosts
-  .filter(p => p.id !== entry.id)
+  .filter((p) => p.id !== entry.id)
   .sort(() => Math.random() - 0.5)
   .slice(0, 3);
 ---
@@ -34,19 +54,28 @@ const relatedPosts = allPosts
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="animate-fade-up max-w-4xl">
           <div class="flex items-center gap-3 mb-8">
-            <span class="px-4 py-1.5 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg shadow-primary/20">
+            <span
+              class="px-4 py-1.5 bg-primary text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg shadow-primary/20"
+            >
               {post.category}
             </span>
             <span class="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
-            <span class="text-xs text-gray-500 font-bold uppercase tracking-wider">{post.date}</span>
+            <span
+              class="text-xs text-gray-500 font-bold uppercase tracking-wider"
+              >{formatDate(post.date)}</span
+            >
           </div>
 
-          <h1 class="text-4xl md:text-7xl font-bold text-gray-900 leading-[1.1] mb-10 tracking-tight">
+          <h1
+            class="text-4xl md:text-7xl font-bold text-gray-900 leading-[1.1] mb-10 tracking-tight"
+          >
             {post.title}
           </h1>
 
           <div class="flex items-center gap-5">
-            <div class="w-14 h-14 bg-gray-200 rounded-2xl overflow-hidden shadow-inner rotate-3 hover:rotate-0 transition-transform duration-500">
+            <div
+              class="w-14 h-14 bg-gray-200 rounded-2xl overflow-hidden shadow-inner rotate-3 hover:rotate-0 transition-transform duration-500"
+            >
               <img
                 src={`https://ui-avatars.com/api/?name=${post.author}&background=3899B7&color=fff`}
                 alt={post.author}
@@ -54,39 +83,57 @@ const relatedPosts = allPosts
               />
             </div>
             <div>
-              <p class="text-sm font-black text-gray-900 uppercase tracking-tight">{post.author}</p>
-              <p class="text-xs text-gray-400 font-medium">{post.readTime} de lectura intensa</p>
+              <p
+                class="text-sm font-black text-gray-900 uppercase tracking-tight"
+              >
+                {post.author}
+              </p>
+              <p class="text-xs text-gray-400 font-medium">
+                {post.readTime} de lectura intensa
+              </p>
             </div>
           </div>
         </div>
       </div>
-      
+
       <!-- Fondo decorativo -->
-      <div class="absolute top-0 right-0 w-1/3 h-full bg-primary/5 -skew-x-12 translate-x-1/2"></div>
+      <div
+        class="absolute top-0 right-0 w-1/3 h-full bg-primary/5 -skew-x-12 translate-x-1/2"
+      >
+      </div>
     </section>
 
     <!-- Main Image -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 md:-mt-24 relative z-20">
-      <div class="relative rounded-[3.5rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)] aspect-[21/9]">
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 md:-mt-24 relative z-20"
+    >
+      <div
+        class="relative rounded-[3.5rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)] aspect-[21/9]"
+      >
         <img
           src={post.image}
           alt={post.title}
           class="w-full h-full object-cover animate-image-reveal"
         />
-        <div class="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-[3.5rem]"></div>
+        <div
+          class="absolute inset-0 ring-1 ring-inset ring-black/10 rounded-[3.5rem]"
+        >
+        </div>
       </div>
     </div>
 
     <!-- Article Content -->
-    <article class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
-      <div class="prose prose-xl prose-gray max-w-none 
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div
+        class="prose prose-xl prose-gray max-w-none
         prose-headings:font-bold prose-headings:text-gray-900 prose-headings:tracking-tight
         prose-p:text-gray-600 prose-p:leading-[1.8] prose-p:text-lg
         prose-strong:text-gray-900 prose-strong:font-black
         prose-img:rounded-[2rem] prose-img:shadow-2xl prose-img:mx-auto prose-img:block
         prose-a:text-primary prose-a:no-underline hover:prose-a:underline
         prose-blockquote:border-l-primary prose-blockquote:bg-primary/5 prose-blockquote:p-8 prose-blockquote:rounded-r-3xl prose-blockquote:italic
-        prose-li:text-gray-600">
+        prose-li:text-gray-600"
+      >
         <Content />
       </div>
 
@@ -97,9 +144,20 @@ const relatedPosts = allPosts
             href="/blog"
             class="group flex items-center gap-3 text-sm font-black text-gray-900 uppercase tracking-tighter"
           >
-            <div class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-primary group-hover:border-primary group-hover:text-white transition-all duration-300">
-              <svg class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            <div
+              class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-primary group-hover:border-primary group-hover:text-white transition-all duration-300"
+            >
+              <svg
+                class="w-4 h-4 transform group-hover:-translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
               </svg>
             </div>
             VOLVER AL BLOG
@@ -109,28 +167,43 @@ const relatedPosts = allPosts
     </article>
 
     <!-- Artículos Relacionados -->
-    {relatedPosts.length > 0 && (
-      <section class="py-32 bg-gray-50/50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div class="flex items-end justify-between mb-16">
-            <div>
-              <h3 class="text-xs font-black text-primary uppercase tracking-[0.3em] mb-4">Relacionados</h3>
-              <h4 class="text-4xl font-light text-gray-900">También te <span class="text-primary italic font-serif">puede interesar</span></h4>
+    {
+      relatedPosts.length > 0 && (
+        <section class="py-32 bg-gray-50/50">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-end justify-between mb-16">
+              <div>
+                <h3 class="text-xs font-black text-primary uppercase tracking-[0.3em] mb-4">
+                  Relacionados
+                </h3>
+                <h4 class="text-4xl font-light text-gray-900">
+                  También te{' '}
+                  <span class="text-primary italic font-serif">
+                    puede interesar
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+              {relatedPosts.map((p) => (
+                <a href={`/blog/${p.id}`} class="group block">
+                  <div class="relative rounded-3xl overflow-hidden aspect-video mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500">
+                    <img
+                      src={p.data.image}
+                      alt={p.data.title}
+                      class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                    />
+                  </div>
+                  <h5 class="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-2">
+                    {p.data.title}
+                  </h5>
+                </a>
+              ))}
             </div>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            {relatedPosts.map((p) => (
-              <a href={`/blog/${p.id}`} class="group block">
-                <div class="relative rounded-3xl overflow-hidden aspect-video mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500">
-                  <img src={p.data.image} alt={p.data.title} class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" />
-                </div>
-                <h5 class="text-xl font-bold text-gray-900 group-hover:text-primary transition-colors line-clamp-2">{p.data.title}</h5>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-    )}
+        </section>
+      )
+    }
   </main>
 
   <Footer />
@@ -139,12 +212,24 @@ const relatedPosts = allPosts
 
 <style>
   @keyframes fade-up {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   @keyframes image-reveal {
-    from { transform: scale(1.1); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+    from {
+      transform: scale(1.1);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
   .animate-fade-up {
     animation: fade-up 1s cubic-bezier(0.16, 1, 0.3, 1) both;

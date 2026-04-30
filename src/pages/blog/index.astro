@@ -15,10 +15,15 @@ const sortedPosts = allPosts.sort((a, b) => {
 const featuredPost = sortedPosts.length > 0 ? (sortedPosts.find(p => p.data.featured) || sortedPosts[0]) : null;
 const otherPosts = featuredPost ? sortedPosts.filter(p => p.id !== featuredPost.id) : [];
 
-// Función para formatear la fecha en español
+// Función para formatear la fecha en español (ej: 7 de febrero de 2025)
 const formatDate = (dateString) => {
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
-  return new Date(dateString).toLocaleDateString('es-ES', options);
+  if (!dateString) return "";
+  const [year, month, day] = dateString.split('-').map(Number);
+  const months = [
+    'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+    'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+  ];
+  return `${day} de ${months[month - 1]} de ${year}`;
 };
 ---
 
