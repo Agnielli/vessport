@@ -40,3 +40,12 @@
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.2); }
 }
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-bounce-subtle {
+  animation: bounce-subtle 3s infinite ease-in-out;
+}
