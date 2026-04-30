@@ -1,66 +1,209 @@
 ---
 // Apple-style products section with clean, minimalist design
-const products = [
+const categories = [
   {
-    id: 1,
-    name: "Camiseta Fútbol Garrucha",
-    description: "Diseño profesional con tecnología full-print y materiales premium",
-    features: ["Tecnología Full-Print", "Tela Transpirable", "Corte Atlético"],
-    frontImage: "/images/garrucha-futbol-delantera.webp",
-    backImage: "/images/garrucha-futbol-trasera.webp",
-    price: "",
-    category: "Fútbol"
+    title: "Fútbol",
+    products: [
+      {
+        id: 1,
+        name: "Camiseta Fútbol Garrucha",
+        description: "Diseño profesional con tecnología full-print y materiales premium",
+        features: ["Tecnología Full-Print", "Tela Transpirable", "Corte Atlético"],
+        frontImage: "/images/garrucha-futbol-delantera.webp",
+        backImage: "/images/garrucha-futbol-trasera.webp",
+      },
+      {
+        id: 2,
+        name: "Camiseta Futbol Cuevas",
+        description: "Estilo urbano con máxima comodidad para el juego intenso",
+        features: ["Diseño Urbano", "Secado Rápido", "Libertad de Movimiento"],
+        frontImage: "/images/cuevas-futbol-delantera.webp",
+        backImage: "/images/cuevas-futbol-trasera.webp",
+      },
+      {
+        id: 3,
+        name: "Camiseta Visitante Cuevas",
+        description: "Optimizada para corredores con tecnología de ventilación avanzada",
+        features: ["Ultra Ligera", "Ventilación 360°", "Reflectivos Nocturnos"],
+        frontImage: "/images/cuevas-2-delantera.webp",
+        backImage: "/images/cuevas-2-trasera.webp",
+      }
+    ]
   },
   {
-    id: 2,
-    name: "Camiseta Futbol Cuevas",
-    description: "Estilo urbano con máxima comodidad para el juego intenso",
-    features: ["Diseño Urbano", "Secado Rápido", "Libertad de Movimiento"],
-    frontImage: "/images/cuevas-futbol-delantera.webp",
-    backImage: "/images/cuevas-futbol-trasera.webp",
-    price: "",
-    category: "Fútbol"
+    title: "Baloncesto",
+    products: [
+      {
+        id: 4,
+        name: "Equipación Baloncesto Gabas",
+        description: "Diseño específico para baloncesto con flexibilidad total",
+        features: ["Flexibilidad Total", "Anti-Sudor", "Costuras Planas"],
+        frontImage: "/images/gabas-delantera.webp",
+        backImage: "/images/gabas-trasera.webp",
+      },
+      {
+        id: 5,
+        name: "Equipación Visitante Gabas",
+        description: "Para entrenamientos de alta intensidad con durabilidad extrema",
+        features: ["Resistencia Extrema", "Compresión Ligera", "Antibacterial"],
+        frontImage: "/images/gabas-visitante-delantera.webp",
+        backImage: "/images/gabas-visitante-trasera.webp",
+      },
+      {
+        id: 6,
+        name: "Camiseta Training Basket",
+        description: "Tejido técnico ligero para el máximo rendimiento en cancha",
+        features: ["Ultra Transpirable", "Secado Rápido", "Corte Holgado"],
+        frontImage: "/images/gabas-delantera.webp",
+        backImage: "/images/gabas-trasera.webp",
+      }
+    ]
   },
   {
-    id: 3,
-    name: "Camiseta Visitante Cuevas",
-    description: "Optimizada para corredores con tecnología de ventilación avanzada",
-    features: ["Ultra Ligera", "Ventilación 360°", "Reflectivos Nocturnos"],
-    frontImage: "/images/cuevas-2-delantera.webp",
-    backImage: "/images/cuevas-2-trasera.webp",
-    price: "",
-    category: "Fútbol"
+    title: "Running",
+    products: [
+      {
+        id: 7,
+        name: "Camiseta Running Pro",
+        description: "Aerodinámica y ligera para largas distancias",
+        features: ["Ultraligera", "Costuras Planas", "Reflectantes"],
+        frontImage: "/images/cuevas-2-delantera.webp",
+        backImage: "/images/cuevas-2-trasera.webp",
+      },
+      {
+        id: 8,
+        name: "Shorts Compresión",
+        description: "Ajuste perfecto que reduce la fatiga muscular",
+        features: ["Compresión Gradual", "Bolsillo Oculto", "Anti-rozaduras"],
+        frontImage: "/images/pantalon-futbol-delantera.webp",
+        backImage: "/images/pantalon-futbol-trasera.webp",
+      },
+      {
+        id: 9,
+        name: "Cortavientos Técnico",
+        description: "Protección contra el viento sin sacrificar transpirabilidad",
+        features: ["Repelente al Agua", "Compactable", "Ventilación Espalda"],
+        frontImage: "/images/hero.webp",
+        backImage: "/images/hero.webp",
+      }
+    ]
   },
   {
-    id: 4,
-    name: "Pantalones Fútbol",
-    description: "Optimizada para corredores con tecnología de ventilación avanzada",
-    features: ["Ultra Ligeros", "Ventilación 360°", "Reflectivos Nocturnos"],
-    frontImage: "/images/pantalon-futbol-delantera.webp",
-    backImage: "/images/pantalon-futbol-trasera.webp",
-    price: "",
-    category: "Fútbol"
+    title: "Voleibol",
+    products: [
+      {
+        id: 10,
+        name: "Camiseta Voley Elite",
+        description: "Sin mangas para total libertad de movimiento en el remate",
+        features: ["Sin Mangas", "Tejido Elástico", "Alta Resistencia"],
+        frontImage: "/images/garrucha-futbol-delantera.webp",
+        backImage: "/images/garrucha-futbol-trasera.webp",
+      },
+      {
+        id: 11,
+        name: "Mallas Voley Pro",
+        description: "Ajuste seguro y cómodo para cada salto y caída",
+        features: ["Talle Alto", "Opacidad Total", "Secado Rápido"],
+        frontImage: "/images/pantalon-futbol-delantera.webp",
+        backImage: "/images/pantalon-futbol-trasera.webp",
+      },
+      {
+        id: 12,
+        name: "Top Entrenamiento",
+        description: "Soporte y estilo para tus sesiones de práctica",
+        features: ["Soporte Medio", "Espalda Cruzada", "Transpirable"],
+        frontImage: "/images/cuevas-futbol-delantera.webp",
+        backImage: "/images/cuevas-futbol-trasera.webp",
+      }
+    ]
   },
   {
-    id: 5,
-    name: "Equipación Baloncesto",
-    description: "Diseño específico para baloncesto con flexibilidad total",
-    features: ["Flexibilidad Total", "Anti-Sudor", "Costuras Planas"],
-    frontImage: "/images/gabas-delantera.webp",
-    backImage: "/images/gabas-trasera.webp",
-    price: "",
-    category: "Baloncesto"
+    title: "Eventos Especiales",
+    products: [
+      {
+        id: 13,
+        name: "Camiseta Finisher",
+        description: "El mejor recuerdo para los participantes de tu evento",
+        features: ["Diseño Conmemorativo", "Tallas Unisex", "Económica"],
+        frontImage: "/images/mockup-muestra.webp",
+        backImage: "/images/mockup-muestra.webp",
+      },
+      {
+        id: 14,
+        name: "Polo Staff",
+        description: "Identificación elegante y profesional para organizadores",
+        features: ["Cuello Rib", "Tejido Piqué", "Personalizable"],
+        frontImage: "/images/gabas-delantera.webp",
+        backImage: "/images/gabas-trasera.webp",
+      },
+      {
+        id: 15,
+        name: "Dorsal Textil",
+        description: "Dorsales impresos directamente en la prenda",
+        features: ["Sin Imperdibles", "No Roza", "Full Print"],
+        frontImage: "/images/cuevas-2-delantera.webp",
+        backImage: "/images/cuevas-2-trasera.webp",
+      }
+    ]
   },
   {
-    id: 6,
-    name: "Equipación Visitante",
-    description: "Para entrenamientos de alta intensidad con durabilidad extrema",
-    features: ["Resistencia Extrema", "Compresión Ligera", "Antibacterial"],
-    frontImage: "/images/gabas-visitante-delantera.webp",
-    backImage: "/images/gabas-visitante-trasera.webp",
-    price: "",
-    category: "Baloncesto"
+    title: "Empresas",
+    products: [
+      {
+        id: 16,
+        name: "Uniforme Corporativo",
+        description: "Imagen de marca unificada y profesional",
+        features: ["Colores Corporativos", "Alta Durabilidad", "Fácil Lavado"],
+        frontImage: "/images/hero.webp",
+        backImage: "/images/hero.webp",
+      },
+      {
+        id: 17,
+        name: "Chaleco Acolchado",
+        description: "Calidez y movilidad para trabajos en exterior o almacén",
+        features: ["Térmico", "Bolsillos Útiles", "Logo Bordado"],
+        frontImage: "/images/gabas-visitante-delantera.webp",
+        backImage: "/images/gabas-visitante-trasera.webp",
+      },
+      {
+        id: 18,
+        name: "Sudadera Merch",
+        description: "Regalo perfecto para clientes o empleados",
+        features: ["Algodón Premium", "Felpa Interior", "Diseño Moderno"],
+        frontImage: "/images/cuevas-futbol-delantera.webp",
+        backImage: "/images/cuevas-futbol-trasera.webp",
+      }
+    ]
   },
+  {
+    title: "Asociaciones y Grupos",
+    products: [
+      {
+        id: 19,
+        name: "Camiseta Peña",
+        description: "Viste a tu grupo de amigos o peña festera",
+        features: ["Diseño Divertido", "Tallas para Todos", "Resistente"],
+        frontImage: "/images/garrucha-futbol-delantera.webp",
+        backImage: "/images/garrucha-futbol-trasera.webp",
+      },
+      {
+        id: 20,
+        name: "Equipación Club",
+        description: "Identidad visual para clubes de senderismo, pesca, etc.",
+        features: ["Tejido Técnico", "Protección UV", "Bolsillos"],
+        frontImage: "/images/cuevas-2-delantera.webp",
+        backImage: "/images/cuevas-2-trasera.webp",
+      },
+      {
+        id: 21,
+        name: "Sudadera Grupo",
+        description: "Prenda de abrigo unificada para vuestras salidas",
+        features: ["Capucha Ajustable", "Bolsillo Canguro", "Cálida"],
+        frontImage: "/images/gabas-delantera.webp",
+        backImage: "/images/gabas-trasera.webp",
+      }
+    ]
+  }
 ];
 ---
 
@@ -79,87 +222,86 @@ const products = [
         </p>
       </div>
 
-    <!-- Products Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-      {products.map((product) => (
-        <div class="product-card group cursor-pointer">
-          
-          <!-- Card Container -->
-          <div class="bg-white rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-700 ease-out transform hover:-translate-y-2 overflow-hidden border border-gray-100">
-            
-            <!-- Image Container with Flip Effect -->
-            <div class="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+    <!-- Categories Loop -->
+    {categories.map((category) => (
+      <div class="mb-24 last:mb-0">
+        <h3 class="text-3xl font-light text-gray-800 mb-10 border-l-4 border-primary pl-4">
+          {category.title}
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+          {category.products.map((product) => (
+            <div class="product-card group cursor-pointer">
               
-              <!-- Front Image -->
-              <div class="image-front absolute inset-0 transition-transform duration-700 ease-in-out">
-                <img 
-                  src={product.frontImage} 
-                  alt={`${product.name} - Vista frontal`}
-                  class="w-full h-full object-cover object-center"
-                  loading="lazy"
-                />
-              </div>
-              
-              <!-- Back Image -->
-              <div class="image-back absolute inset-0 transition-transform duration-700 ease-in-out transform translate-x-full">
-                <img 
-                  src={product.backImage} 
-                  alt={`${product.name} - Vista trasera`}
-                  class="w-full h-full object-cover object-center"
-                  loading="lazy"
-                />
-              </div>
-              
-              <!-- Category Badge -->
-              <div class="absolute top-4 left-4">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-white/90 text-gray-700 backdrop-blur-sm">
-                  {product.category}
-                </span>
-              </div>
-              
-              <!-- View Toggle Indicator -->
-              <div class="absolute bottom-4 right-4">
-                <div class="flex space-x-1">
-                  <div class="w-2 h-2 rounded-full bg-white/70 view-indicator-front transition-all duration-300"></div>
-                  <div class="w-2 h-2 rounded-full bg-white/30 view-indicator-back transition-all duration-300"></div>
+              <!-- Card Container -->
+              <div class="bg-white rounded-3xl shadow-sm hover:shadow-2xl transition-all duration-700 ease-out transform hover:-translate-y-2 overflow-hidden border border-gray-100 h-full flex flex-col">
+                
+                <!-- Image Container with Flip Effect -->
+                <div class="relative aspect-square overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+                  
+                  <!-- Front Image -->
+                  <div class="image-front absolute inset-0 transition-transform duration-700 ease-in-out">
+                    <img 
+                      src={product.frontImage} 
+                      alt={`${product.name} - Vista frontal`}
+                      class="w-full h-full object-cover object-center"
+                      loading="lazy"
+                    />
+                  </div>
+                  
+                  <!-- Back Image -->
+                  <div class="image-back absolute inset-0 transition-transform duration-700 ease-in-out transform translate-x-full">
+                    <img 
+                      src={product.backImage} 
+                      alt={`${product.name} - Vista trasera`}
+                      class="w-full h-full object-cover object-center"
+                      loading="lazy"
+                    />
+                  </div>
+                  
+                  <!-- View Toggle Indicator -->
+                  <div class="absolute bottom-4 right-4">
+                    <div class="flex space-x-1">
+                      <div class="w-2 h-2 rounded-full bg-white/70 view-indicator-front transition-all duration-300"></div>
+                      <div class="w-2 h-2 rounded-full bg-white/30 view-indicator-back transition-all duration-300"></div>
+                    </div>
+                  </div>
+                  
+                  <!-- Hover Overlay -->
+                  <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
+                </div>
+                
+                <!-- Content -->
+                <div class="p-8 flex flex-col flex-grow">
+                  
+                  <!-- Product Name -->
+                  <h4 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-primary transition-colors duration-300">
+                    {product.name}
+                  </h4>
+                  
+                  <!-- Description -->
+                  <p class="text-gray-600 text-sm leading-relaxed mb-6 font-light flex-grow">
+                    {product.description}
+                  </p>
+                  
+                  <!-- Features -->
+                  <div class="space-y-2">
+                    {product.features.map((feature) => (
+                      <div class="flex items-center text-sm text-gray-500">
+                        <svg class="w-4 h-4 text-primary mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="font-light">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
-              
-              <!-- Hover Overlay -->
-              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300"></div>
             </div>
-            
-            <!-- Content -->
-            <div class="p-8">
-              
-              <!-- Product Name -->
-              <h3 class="text-xl font-semibold text-gray-900 mb-3 group-hover:text-primary transition-colors duration-300">
-                {product.name}
-              </h3>
-              
-              <!-- Description -->
-              <p class="text-gray-600 text-sm leading-relaxed mb-6 font-light">
-                {product.description}
-              </p>
-              
-              <!-- Features -->
-              <div class="space-y-2 mb-6">
-                {product.features.map((feature) => (
-                  <div class="flex items-center text-sm text-gray-500">
-                    <svg class="w-4 h-4 text-primary mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                    <span class="font-light">{feature}</span>
-                  </div>
-                ))}
-              </div>
-              
-        
-            </div>
-          </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    ))}
     
     <!-- Call to Action -->
     <div class="text-center mt-20">
@@ -197,11 +339,6 @@ const products = [
   
   .product-card:hover .view-indicator-back {
     background-color: rgba(255, 255, 255, 0.9);
-  }
-  
-  /* Enhanced shadow on hover */
-  .product-card:hover {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
   }
   
   /* Subtle scale effect for images */
