@@ -1,14 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
+import { getRecentPosts } from '../lib/blog';
 
-// Obtener las 3 entradas más recientes
-const allPosts = await getCollection('blog');
-const posts = allPosts
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
-  .slice(0, 3);
+const posts = await getRecentPosts(3);
 
-const formatDate = (dateString) => {
-  if (!dateString) return "";
+const formatDate = (dateString: string) => {
+  if (!dateString) return '';
   const [year, month, day] = dateString.split('-').map(Number);
   const months = [
     'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
@@ -41,16 +37,16 @@ const formatDate = (dateString) => {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
       {posts.map((post) => (
         <article class="group cursor-pointer">
-          <a href={`/blog/${post.id}`} class="block">
+          <a href={`/blog/${post.slug}`} class="block">
             <div class="relative overflow-hidden rounded-3xl mb-6 shadow-sm group-hover:shadow-xl transition-all duration-500 aspect-[16/10]">
               <img 
-                src={post.data.image} 
-                alt={post.data.title} 
+                src={post.image} 
+                alt={post.title} 
                 class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
               />
               <div class="absolute top-4 left-4">
                 <span class="px-4 py-1.5 bg-white/90 backdrop-blur-sm text-[10px] font-bold text-gray-900 uppercase tracking-widest rounded-full shadow-sm">
-                  {post.data.category}
+                  {post.category}
                 </span>
               </div>
             </div>
@@ -59,20 +55,20 @@ const formatDate = (dateString) => {
               <div class="flex items-center gap-4 text-xs text-gray-400 font-medium">
                 <span class="flex items-center gap-1.5">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                  {formatDate(post.data.date)}
+                  {formatDate(post.date)}
                 </span>
                 <span class="flex items-center gap-1.5">
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                  {post.data.readTime}
+                  {post.readTime}
                 </span>
               </div>
               
               <h4 class="text-2xl font-bold text-gray-900 leading-snug group-hover:text-primary transition-colors duration-300">
-                {post.data.title}
+                {post.title}
               </h4>
               
               <p class="text-gray-500 font-light leading-relaxed line-clamp-2">
-                {post.data.excerpt}
+                {post.excerpt}
               </p>
               
               <div class="pt-2">

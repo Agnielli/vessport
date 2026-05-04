@@ -1,0 +1,10 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AdminApp from '../components/admin/AdminApp';
+
+const title = 'Panel Admin | Ves Sport';
+---
+
+<Layout title={title}>
+  <AdminApp client:load />
+</Layout>
