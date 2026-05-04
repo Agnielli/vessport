@@ -119,7 +119,7 @@ export default function PostEditor({ post, onBack }: Props) {
 
             <div>
               <label className="block text-sm font-bold text-gray-700 mb-2">Imagen URL</label>
-              <input type="url" name="image" value={form.image} onChange={handleChange} className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="https://..." required />
+              <input type="text" name="image" value={form.image} onChange={handleChange} className="w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent outline-none" placeholder="/images/blog/ejemplo.avif o https://..." required />
               {form.image && (
                 <img src={form.image} alt="Preview" className="mt-3 rounded-xl h-40 object-cover w-full" />
               )}

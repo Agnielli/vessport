@@ -1,7 +1,7 @@
 ---
 title: 'Entrevista a Ico: 10 años del Trail Carboneras Desafío Playa de los Muertos'
 excerpt: 'Hablamos con Ico, uno de los organizadores del Desafío Playa de los Muertos, sobre la evolución de esta prueba icónica, su décimo aniversario y la nueva piel diseñada por VES SPORT.'
-date: '2026-04-28'
+date: '2026-05-04'
 image: '/images/blog/desafio1.avif'
 author: 'Enrique Sabariego'
 category: 'Noticias'
@@ -9,9 +9,9 @@ readTime: '6 min'
 featured: true
 ---
 
-El **Trail Carboneras Desafío Playa de los Muertos**, organizado por el **Club Deportivo Costa Levante**, se prepara para una edición histórica. El próximo **3 de mayo de 2026**, corredores y senderistas se darán cita en uno de los parajes más espectaculares de la geografía española para celebrar su **10º aniversario**.
+El **Trail Carboneras Desafío Playa de los Muertos**, organizado por el **Club Deportivo Costa Levante**, celebró una edición histórica. El pasado **3 de mayo de 2026**, corredores y senderistas se dieron cita en uno de los parajes más espectaculares de la geografía española para celebrar su **10º aniversario**.
 
-Hemos tenido la oportunidad de charlar con **Ico**, una de las personas detrás de la organización, para que nos cuente cómo ha sido este viaje de una década, los secretos del éxito de la prueba y cómo ha sido el proceso de creación de la camiseta conmemorativa junto a **VES SPORT**.
+Tuvimos la oportunidad de charlar con **Ico**, una de las personas detrás de la organización, para que nos contara cómo fue este viaje de una década, los secretos del éxito de la prueba y cómo fue el proceso de creación de la camiseta conmemorativa junto a **VES SPORT**.
 
 ---
 
@@ -85,4 +85,4 @@ Queríamos algo especial para la décima edición. Con vuestro diseñador, Juan 
 
 ---
 
-Desde el blog de **VES SPORT**, queremos agradecer a Ico y a todo el **Club Deportivo Costa Levante** su confianza en nosotros para vestir esta décima edición. ¡Nos vemos en la Playa de los Muertos!
+Desde el blog de **VES SPORT**, queremos agradecer a Ico y a todo el **Club Deportivo Costa Levante** su confianza en nosotros para vestir esta décima edición. ¡Nos vimos en la Playa de los Muertos!
